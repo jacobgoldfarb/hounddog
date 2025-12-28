@@ -1,0 +1,2 @@
+{"flowId":"mjqcordo-ndgotk2s","type":"BE.http.start","timestampMs":1766963905692.438,"service":"app","attrs":{"method":"GET","path":"/api/hello"}}
+{"flowId":"mjqcordo-ndgotk2s","type":"BE.work.start","timestampMs":1766963905693.381,"service":"app"}

@@ -4,7 +4,13 @@
   "type": "module",
   "dependencies": {
     "express": "^4.19.2",
-    "@hounddog/core": "0.0.0",
-    "@hounddog/express": "0.0.0"
+    "@hounddog/express": "workspace:*",
+    "@hounddog/core": "workspace:*"
+  },
+  "devDependencies": {
+    "tsx": "^4.15.7"
+  },
+  "scripts": {
+    "dev": "tsx src/server.ts"
   }
 }

@@ -21,8 +21,10 @@
     "clean": "rm -rf dist"
   },
   "peerDependencies": {
-    "@hounddog/core": "0.0.0",
+    "@hounddog/core": "*",
     "express": "^4 || ^5"
+  },
+  "devDependencies": {
+    "@hounddog/core": "workspace:*"
   }
 }
-

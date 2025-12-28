@@ -1,0 +1,10 @@
+{
+  "name": "hounddog-example-api",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "express": "^4.19.2",
+    "@hounddog/core": "0.0.0",
+    "@hounddog/express": "0.0.0"
+  }
+}

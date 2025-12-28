@@ -1,29 +1,28 @@
 # TODO — Hound Dog 🐕
 
-Hounddog is a request-monitoring tool for local development.
+Hounddog is a request-monitoring tool for local development. Developers can easily visualize the full cycle of requests, from FE to BE to DB as they use their applicaiton.
 
 ---
 
 ## 0) Repo + Packaging Skeleton
 
-- [ ] Create monorepo layout
-  - [ ] `packages/core`
-  - [ ] `packages/express`
-  - [ ] `packages/fetch`
-  - [ ] `packages/prisma`
-  - [ ] `packages/cli`
-  - [ ] `examples/` (minimal FE+BE demo)
-- [ ] Decide build tooling (tsup / rollup / tsc) and publish setup
-- [ ] Set up lint/format/test baseline (eslint, prettier, vitest/jest)
+- [x] Create monorepo layout
+  - [x] `packages/core`
+  - [x] `packages/express`
+  - [x] `packages/fetch`
+  - [x] `packages/prisma`
+  - [x] `packages/cli`
+  - [x] `examples/` (minimal FE+BE demo)
+- [x] Decide build tooling (tsup / rollup / tsc) and publish setup
+- [x] Set up lint/format/test baseline (eslint, prettier, vitest/jest)
 
 ---
 
 ## 1) Lock the Contracts (Do Not Build Adapters Before This)
 
-- [ ] Define event model (JSON schema-ish)
-  - [ ] required fields: `flowId`, `type`, `ts`, `service`, `subsystem`
-  - [ ] optional: `durationMs`, `status`, `attrs`, `spanId`, `parentSpanId`
-  - [ ] naming conventions for `type` and `attrs`
+- [x] Define event model (JSON schema-ish)
+  - [x] required fields: `flowId`, `type`, `ts`, `service`, `subsystem`
+  - [x] optional: `durationMs`, `status`, `attrs`, `spanId`, `parentSpanId`
 - [ ] Define flow lifecycle rules
   - [ ] what constitutes START/END for each flow root (UI action, HTTP request, job, manual run)
   - [ ] partial flows (crash / abort) and how they’re represented
@@ -38,16 +37,16 @@ Hounddog is a request-monitoring tool for local development.
 
 ## 2) Core Runtime (Minimal Public API, Internal Plumbing)
 
-- [ ] Implement `@hounddog/core`
-  - [ ] Public API:
-    - [ ] `mark(name, attrs?)`
-    - [ ] `span(name, fn, attrs?)`
-    - [ ] `run(name, fn, attrs?)` (flow root for cron/CLI/tests)
-    - [ ] `getFlowId()`
-  - [ ] Internal adapter API:
-    - [ ] `withFlow(ctx, fn)` (AsyncLocalStorage bridge in Node; best-effort in browser)
-    - [ ] `emit(event)` (append-only event emission)
-    - [ ] `makeFlowId()` (fast, collision-safe)
+- [x] Implement `@hounddog/core`
+  - [x] Public API:
+    - [x] `mark(name, attrs?)`
+    - [x] `span(name, fn, attrs?)`
+    - [x] `run(name, fn, attrs?)` (flow root for cron/CLI/tests)
+    - [x] `getFlowId()`
+  - [x] Internal adapter API:
+    - [x] `withFlow(ctx, fn)` (AsyncLocalStorage bridge in Node; best-effort in browser)
+    - [x] `emit(event)` (append-only event emission)
+    - [x] `makeFlowId()` (fast, collision-safe)
 - [ ] Implement sinks (start with local JSONL)
   - [ ] file sink writer (append-only)
   - [ ] concurrency strategy (multi-process): simple + safe

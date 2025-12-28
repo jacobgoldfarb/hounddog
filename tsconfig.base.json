@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "target": "ES2021",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "lib": ["ES2021", "DOM"],
+    "baseUrl": ".",
+    "paths": {
+      "@hounddog/core": ["packages/core/src"],
+      "@hounddog/express": ["packages/express/src"],
+      "@hounddog/fetch": ["packages/fetch/src"],
+      "@hounddog/prisma": ["packages/prisma/src"],
+      "@hounddog/cli": ["packages/cli/src"]
+    },
+    "strict": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "forceConsistentCasingInFileNames": true,
+    "noUncheckedIndexedAccess": true,
+    "declaration": true,
+    "sourceMap": true,
+    "noEmit": true
+  }
+}

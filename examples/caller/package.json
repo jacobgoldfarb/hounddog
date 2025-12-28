@@ -1,0 +1,9 @@
+{
+  "name": "hounddog-example-caller",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@hounddog/core": "0.0.0",
+    "@hounddog/fetch": "0.0.0"
+  }
+}

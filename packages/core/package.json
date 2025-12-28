@@ -1,0 +1,10 @@
+{
+  "name": "@hounddog/core",
+  "version": "0.0.0",
+  "private": false,
+  "type": "module",
+  "files": [
+    "dist"
+  ]
+}
+

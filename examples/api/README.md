@@ -13,9 +13,9 @@ Steps:
    - pnpm --filter hounddog-example-api dev
      or: npm run dev --workspace=hounddog-example-api
 3. Hit the endpoint:
-   - curl http://localhost:4000/api/hello
+   - `curl http://localhost:4000/api/hello`
 4. Inspect flows:
-   - cat .hounddog/events.jsonl
+   - `cat .hounddog/events.jsonl`
 
 What it does:
 

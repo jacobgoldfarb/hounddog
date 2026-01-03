@@ -1,14 +1,14 @@
 import type { NextFunction, Request, Response } from 'express';
 import { getConfig } from '@hounddog/core';
-import { getFlowId, makeFlowId, withFlow } from '@hounddog/core';
+import { clock, makeFlowId, withFlow } from '@hounddog/core';
 import { mark } from '@hounddog/core';
 
 export function houndMiddleware() {
   return function middleware(req: Request, res: Response, next: NextFunction) {
     const cfg = getConfig();
-    const incoming = req.header(cfg.propagationHeader) || '';
-    const flowId = incoming || makeFlowId();
-    const start = Date.now();
+    const incomingReqFlowId = req.header(cfg.propagationHeader) || '';
+    const flowId = incomingReqFlowId || makeFlowId();
+    const startPerf = clock.nowPerfMs();
 
     res.setHeader(cfg.propagationHeader, flowId);
 
@@ -23,7 +23,7 @@ export function houndMiddleware() {
         res.removeListener('error', onError);
         void mark('BE.http.end', {
           status: res.statusCode,
-          durationMs: Date.now() - start,
+          durationMs: clock.nowPerfMs() - startPerf,
         });
       };
       const onClose = () => {
@@ -31,7 +31,7 @@ export function houndMiddleware() {
         res.removeListener('error', onError);
         void mark('BE.http.end', {
           status: 'closed',
-          durationMs: Date.now() - start,
+          durationMs: clock.nowPerfMs() - startPerf,
         });
       };
       const onError = () => {
@@ -39,7 +39,7 @@ export function houndMiddleware() {
         res.removeListener('close', onClose);
         void mark('BE.http.end', {
           status: 'error',
-          durationMs: Date.now() - start,
+          durationMs: clock.nowPerfMs() - startPerf,
         });
       };
 

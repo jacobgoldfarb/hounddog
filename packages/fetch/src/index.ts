@@ -1,55 +1,53 @@
-import { getConfig } from '@hounddog/core';
+import { clock, getConfig } from '@hounddog/core';
 import { getFlowId, mark } from '@hounddog/core';
-
-function normalizeUrl(input: RequestInfo | URL): string {
-  const cfg = getConfig();
-  const url = typeof input === 'string'
-    ? new URL(input, (globalThis as any).location?.origin || 'http://localhost')
-    : input instanceof URL
-      ? input
-      : new URL((input as Request).url);
-  return url.toString();
-}
+import { normalizeUrl } from './utils.js';
 
 export function houndFetch(baseFetch: typeof fetch): typeof fetch {
   return async (input: RequestInfo | URL, init?: RequestInit) => {
     const cfg = getConfig();
-    const urlString = normalizeUrl(input);
-    const start = Date.now();
+    const url = normalizeUrl(input);
+    const startPerf = clock.nowPerfMs();
     const flowId = getFlowId();
 
     const headers = new Headers(
-      (init && init.headers) ||
-        (input instanceof Request ? input.headers : undefined) ||
-        {},
+      (init && init.headers) || (input instanceof Request ? input.headers : undefined) || {},
     );
     if (flowId) {
       headers.set(cfg.propagationHeader, flowId);
     }
     const nextInit: RequestInit = { ...(init || {}), headers };
 
-    await mark('FE.http.start', { url: urlString });
+    await mark('FE.http.start', { url });
     try {
       const res = await baseFetch(input as any, nextInit);
       await mark('FE.http.end', {
-        url: urlString,
+        url,
         status: (res as Response).status,
-        durationMs: Date.now() - start,
+        durationMs: clock.nowPerfMs() - startPerf,
       });
       return res;
     } catch (err) {
       await mark('FE.http.end', {
-        url: urlString,
+        url,
         status: 'error',
-        durationMs: Date.now() - start,
+        durationMs: clock.nowPerfMs() - startPerf,
       });
       throw err;
     }
   };
 }
 
-export function patchFetch(): void {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  (globalThis as any).fetch = houndFetch(globalThis.fetch.bind(globalThis));
+export function enableHoundFetch(options?: {
+  baseFetch?: typeof fetch;
+  patchGlobal?: boolean;
+}): typeof fetch {
+  const base = options?.baseFetch ?? (globalThis as any).fetch?.bind(globalThis);
+  if (!base) {
+    throw new Error('globalThis.fetch is not available; provide baseFetch');
+  }
+  const instrumented = houndFetch(base);
+  if (options?.patchGlobal !== false) {
+    (globalThis as any).fetch = instrumented;
+  }
+  return instrumented;
 }
-

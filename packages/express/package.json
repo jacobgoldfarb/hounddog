@@ -25,6 +25,7 @@
     "express": "^4 || ^5"
   },
   "devDependencies": {
-    "@hounddog/core": "workspace:*"
+    "@hounddog/core": "workspace:*",
+    "@types/express": "^5.0.6"
   }
 }

@@ -78,3 +78,15 @@ export async function run<T>(
 }
 
 export { withFlow, getFlowId, makeFlowId };
+
+/**
+ * Frontend action helper. Starts a new flow for a UI action and runs `fn`.
+ * Events emitted within `fn` (including fetch) will attach to this flow.
+ */
+export async function action<T>(
+  name: string,
+  fn: () => Promise<T> | T,
+  attrs?: Record<string, unknown>,
+): Promise<T> {
+  return run(`FE.action.${name}`, fn, attrs);
+}

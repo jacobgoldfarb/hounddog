@@ -5,7 +5,8 @@
   "dependencies": {
     "express": "^4.19.2",
     "@hounddog/express": "workspace:*",
-    "@hounddog/core": "workspace:*"
+    "@hounddog/core": "workspace:*",
+    "cors": "^2.8.5"
   },
   "devDependencies": {
     "tsx": "^4.15.7"

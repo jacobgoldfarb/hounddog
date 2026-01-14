@@ -1,8 +1,12 @@
 import express, { type Request, type Response } from 'express';
+import cors from 'cors';
 import { houndMiddleware } from '@hounddog/express';
 import { mark } from '@hounddog/core';
 
 const app = express();
+app.use(cors({ origin: true, exposedHeaders: ['x-hound-flow'] }));
+
+// Hounddog middleware - automatically handles /__hound/events for frontend flushes
 app.use(houndMiddleware());
 
 app.get('/api/hello', async (_req: Request, res: Response) => {

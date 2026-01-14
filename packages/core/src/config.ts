@@ -21,10 +21,7 @@ export function configureHounddog(partial: Partial<HoundConfig>): void {
   currentConfig = {
     ...currentConfig,
     ...partial,
-    sink: {
-      ...(currentConfig.sink || defaultConfig.sink!),
-      ...(partial.sink || {}),
-    },
+    sink: partial.sink ?? currentConfig.sink,
   };
 }
 

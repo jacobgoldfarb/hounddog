@@ -2,7 +2,7 @@
  * Event emitted by Hounddog.
  *
  * Notes:
- * - `ts` is wall-clock epoch milliseconds for cross-service ordering.
+ * - `timestampMs` is wall-clock epoch milliseconds for cross-service ordering.
  * - `durationMs` is a monotonic delta in milliseconds (perf-based) when applicable.
  * - `status` may be domain-specific (e.g. "error") or an HTTP status code.
  * - `attrs` should contain PII-safe, JSON-serializable structured data.
@@ -44,11 +44,20 @@ export type HoundConfig = {
   sink?: HoundSinkConfig;
 };
 
-export type HoundSinkConfig = {
-  kind: 'jsonl';
-  filePath: string;
-  rotateBytes?: number;
-  retainFiles?: number;
-  batchMax?: number;
-  flushIntervalMs?: number;
-};
+export type HoundSinkConfig =
+  | {
+      kind: 'jsonl';
+      filePath: string;
+      rotateBytes?: number;
+      retainFiles?: number;
+      batchMax?: number;
+      flushIntervalMs?: number;
+    }
+  | {
+      kind: 'noop';
+    }
+  | {
+      kind: 'http';
+      /** Endpoint URL to POST events to (e.g. http://localhost:4000/__hound/events) */
+      endpoint: string;
+    };

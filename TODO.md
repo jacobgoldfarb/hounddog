@@ -47,15 +47,15 @@ Hounddog is a request-monitoring tool for local development. Developers can easi
     - [x] `withFlow(ctx, fn)` (AsyncLocalStorage bridge in Node; best-effort in browser)
     - [x] `emit(event)` (append-only event emission)
     - [x] `makeFlowId()` (fast, collision-safe)
-- [ ] Implement sinks (start with local JSONL)
+- [x] Implement sinks (start with local JSONL)
   - [ ] file sink writer (append-only)
   - [ ] concurrency strategy (multi-process): simple + safe
   - [ ] rotation/retention strategy (basic defaults)
-- [ ] Config system
-  - [ ] enabled/disabled
-  - [ ] service name
+- [x] Config system
+  - [x] enabled/disabled
+  - [x] service name
   - [ ] redaction options
-  - [ ] orphan mark behavior (default: drop/no-op + warn once)
+  - [x] orphan mark behavior (default: drop/no-op + warn once)
 
 ---
 

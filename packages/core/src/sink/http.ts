@@ -1,4 +1,4 @@
-import { getConfig } from '../config';
+import { getConfig } from '../lib/config.js';
 import type { HoundEvent } from '../types';
 import type { Sink } from './types';
 

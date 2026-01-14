@@ -1,26 +1,45 @@
+/**
+ * Internal Hounddog request path prefix.
+ */
+const HOUND_INTERNAL_PREFIX = '/__hound/';
+
+/**
+ * Check if a URL is a Hounddog internal request (should not be instrumented).
+ */
+export function isHoundInternalRequest(url: string): boolean {
+  return url.includes(HOUND_INTERNAL_PREFIX);
+}
+
+/**
+ * Normalize a fetch input to a URL string (without query params).
+ * Used for logging and flow identification.
+ */
 export function normalizeUrl(input: RequestInfo | URL): string {
   if (typeof input === 'string') {
-    try {
-      const base = (globalThis as any).location?.origin as string | undefined;
-      const u = new URL(input, base);
-      u.search = '';
-      return u.toString();
-    } catch {
-      return input.split('?')[0] ?? input;
-    }
+    return parseAndStripQuery(input);
   }
+
   if (input instanceof URL) {
-    const u = new URL(input.toString());
-    u.search = '';
-    return u.toString();
+    const copy = new URL(input.toString());
+    copy.search = '';
+    return copy.toString();
   }
-  const req = input as Request;
+
+  // Request object
+  return parseAndStripQuery((input as Request).url);
+}
+
+/**
+ * Parse URL string and strip query parameters.
+ */
+function parseAndStripQuery(urlString: string): string {
   try {
     const base = (globalThis as any).location?.origin as string | undefined;
-    const u = new URL(req.url, base);
-    u.search = '';
-    return u.toString();
+    const url = new URL(urlString, base);
+    url.search = '';
+    return url.toString();
   } catch {
-    return req.url.split('?')[0] ?? req.url;
+    // Fallback: simple string split
+    return urlString.split('?')[0] ?? urlString;
   }
 }

@@ -9,7 +9,7 @@ configureHounddog({
   },
 });
 
-enableHoundFetch({ baseFetch: fetch });
+enableHoundFetch();
 
 const btn = document.getElementById('btn') as HTMLButtonElement;
 const out = document.getElementById('out') as HTMLDivElement;

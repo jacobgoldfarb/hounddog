@@ -1,5 +1,8 @@
-import { HoundConfig } from './types';
+import type { HoundConfig } from '../types.js';
 
+/**
+ * Default configuration.
+ */
 const defaultConfig: HoundConfig = {
   enabled: true,
   service: 'app',
@@ -8,7 +11,7 @@ const defaultConfig: HoundConfig = {
   sink: {
     kind: 'jsonl',
     filePath: '.hounddog/events.jsonl',
-    rotateBytes: 5000000,
+    rotateBytes: 5_000_000,
     retainFiles: 3,
     batchMax: 64,
     flushIntervalMs: 250,
@@ -17,6 +20,10 @@ const defaultConfig: HoundConfig = {
 
 let currentConfig: HoundConfig = { ...defaultConfig };
 
+/**
+ * Configure Hounddog with partial options.
+ * Merges with existing config; sink is replaced entirely if provided.
+ */
 export function configureHounddog(partial: Partial<HoundConfig>): void {
   currentConfig = {
     ...currentConfig,
@@ -25,10 +32,16 @@ export function configureHounddog(partial: Partial<HoundConfig>): void {
   };
 }
 
+/**
+ * Get current configuration.
+ */
 export function getConfig(): HoundConfig {
   return currentConfig;
 }
 
+/**
+ * Check if Hounddog is enabled.
+ */
 export function isEnabled(): boolean {
   return currentConfig.enabled;
 }

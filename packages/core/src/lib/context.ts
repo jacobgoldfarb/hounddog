@@ -1,20 +1,32 @@
+/**
+ * Flow context stack.
+ * Tracks active flow IDs across sync and async execution.
+ */
 let flowIdStack: string[] = [];
 
-export function withFlow<WrappedFnReturnType>(
-  fn: () => WrappedFnReturnType,
-  flowId?: string,
-): WrappedFnReturnType {
+/**
+ * Execute a function within a flow context.
+ * The flow ID is available via getFlowId() during execution.
+ *
+ * Handles both sync and async functions:
+ * - Sync: pops flow ID after function returns
+ * - Async: pops flow ID after promise settles
+ */
+export function withFlow<T>(fn: () => T, flowId?: string): T {
   flowIdStack.push(flowId || makeFlowId());
+
   let isSync = true;
   try {
     const result = fn();
-    // Defer pop until promise settles for async functions
+
+    // Handle async functions
     if (result && typeof (result as any).then === 'function') {
       isSync = false;
       return (result as any).finally(() => {
         flowIdStack.pop();
       });
     }
+
     return result;
   } catch (err) {
     flowIdStack.pop();
@@ -26,10 +38,16 @@ export function withFlow<WrappedFnReturnType>(
   }
 }
 
+/**
+ * Get the current flow ID, if any.
+ */
 export function getFlowId(): string | undefined {
   return flowIdStack[flowIdStack.length - 1];
 }
 
+/**
+ * Generate a new unique flow ID.
+ */
 export function makeFlowId(): string {
   const ts = Date.now().toString(36);
   const rand = Math.random().toString(36).slice(2, 10);

@@ -24,6 +24,8 @@ export type HoundEvent = {
   status?: string | number;
   /** Additional structured, PII-safe metadata. */
   attrs?: Record<string, unknown>;
+  /** Marks this event as the terminal event of a flow (flow is complete). */
+  flowTerminal?: boolean;
 };
 
 /**

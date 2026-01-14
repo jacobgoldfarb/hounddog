@@ -1,7 +1,7 @@
 import { mkdirSync, readdirSync, statSync, unlinkSync } from 'node:fs';
 import { appendFile, rename, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
-import { getConfig } from '../config';
+import { getConfig } from '../lib/config.js';
 import type { HoundEvent } from '../types';
 import type { Sink } from './types';
 
@@ -23,9 +23,12 @@ export class JsonlSink implements Sink {
 
   constructor() {
     const cfg = getConfig();
-    const sink = cfg.sink!;
+    const sink = cfg.sink;
+    if (!sink || sink.kind !== 'jsonl') {
+      throw new Error('JsonlSink requires sink.kind: "jsonl"');
+    }
     this.filePath = sink.filePath;
-    this.rotateBytes = sink.rotateBytes ?? 5000000;
+    this.rotateBytes = sink.rotateBytes ?? 5_000_000;
     this.retainFiles = sink.retainFiles ?? 3;
     this.batchMax = sink.batchMax ?? 64;
     this.flushIntervalMs = sink.flushIntervalMs ?? 250;
@@ -76,8 +79,10 @@ export class JsonlSink implements Sink {
       .map((f: any) => ({ f, t: statSync(join(dir, f)).mtimeMs }))
       .sort((a: any, b: any) => b.t - a.t);
     for (let i = this.retainFiles - 1; i < rotated.length; i++) {
+      const item = rotated[i];
+      if (!item) continue;
       try {
-        unlinkSync(join(dir, rotated[i].f));
+        unlinkSync(join(dir, item.f));
       } catch {
         // ignore
       }

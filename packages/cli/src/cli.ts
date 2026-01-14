@@ -4,6 +4,29 @@ import { createInterface } from 'node:readline';
 import { resolve } from 'node:path';
 import { assembleFlows, formatFlow, type EventLine } from './index';
 
+// ─── ANSI Colors ─────────────────────────────────────────────────────────────
+const c = {
+  reset: '\x1b[0m',
+  bold: '\x1b[1m',
+  dim: '\x1b[2m',
+  // Foreground
+  black: '\x1b[30m',
+  red: '\x1b[31m',
+  green: '\x1b[32m',
+  yellow: '\x1b[33m',
+  blue: '\x1b[34m',
+  magenta: '\x1b[35m',
+  cyan: '\x1b[36m',
+  white: '\x1b[37m',
+  gray: '\x1b[90m',
+  // Background
+  bgBlack: '\x1b[40m',
+  bgBlue: '\x1b[44m',
+  bgCyan: '\x1b[46m',
+  bgYellow: '\x1b[43m',
+  bgMagenta: '\x1b[45m',
+};
+
 async function readEvents(filePath: string): Promise<EventLine[]> {
   try {
     const buf = await readFile(filePath, 'utf8');
@@ -39,10 +62,15 @@ async function main(): Promise<void> {
   const filePath = resolve(process.cwd(), sinkPath);
 
   if (cmd === 'help' || hasFlag('--help') || hasFlag('-h')) {
-    console.log('hound flows last [-n N] [--path FILE]');
-    console.log('hound flows show <flowId> [--path FILE]');
-    console.log('hound flows search --marker <name> [--path FILE]');
-    console.log('hound tail [--path FILE] [--from-start]');
+    console.log(`${c.bold}${c.cyan}🐕 hound${c.reset} - request lifecycle tracer\n`);
+    console.log(`${c.dim}Commands:${c.reset}`);
+    console.log(`  ${c.yellow}tail${c.reset}                     Stream events in real-time`);
+    console.log(`  ${c.yellow}flows last${c.reset} [-n N]        Show last N flows`);
+    console.log(`  ${c.yellow}flows show${c.reset} <flowId>      Show specific flow`);
+    console.log(`  ${c.yellow}flows search${c.reset} --marker X  Search for marker\n`);
+    console.log(`${c.dim}Options:${c.reset}`);
+    console.log(`  --path FILE              Log file path (default: .hounddog/events.jsonl)`);
+    console.log(`  --from-start             Start from beginning of file (tail only)`);
     return;
   }
 
@@ -112,7 +140,14 @@ async function main(): Promise<void> {
 
 void main();
 
-// --- Tail (live log) ---
+// ─── Tail (live streaming) ───────────────────────────────────────────────────
+
+interface FlowState {
+  /** Last timestamp per service (to avoid cross-service clock skew) */
+  lastTsByService: Map<string, number>;
+  eventCount: number;
+}
+
 async function tail(filePath: string, opts: { fromStart: boolean }): Promise<void> {
   let lastSize = 0;
   try {
@@ -121,35 +156,40 @@ async function tail(filePath: string, opts: { fromStart: boolean }): Promise<voi
   } catch {
     lastSize = 0;
   }
-  const lastTsByFlow = new Map<string, number>();
-  const intervalMs = 300;
+
+  const flowStates = new Map<string, FlowState>();
+  const recentFlows: string[] = []; // Track order of flows
+  const intervalMs = 200;
   let running = true;
   let warnedMissing = false;
 
   process.on('SIGINT', () => {
     running = false;
+    process.stdout.write(`\n${c.dim}stopped${c.reset}\n`);
   });
 
-  process.stdout.write(`tailing ${filePath}${opts.fromStart ? ' (from start)' : ''}\n`);
+  printHeader(filePath, opts.fromStart);
 
   while (running) {
     try {
       const st = await stat(filePath);
       warnedMissing = false;
-      // rotation: file shrank
+      // Handle rotation: file shrank
       if (st.size < lastSize) {
         lastSize = 0;
+        flowStates.clear();
+        recentFlows.length = 0;
+        process.stdout.write(`${c.dim}── log rotated ──${c.reset}\n`);
       }
       if (st.size > lastSize) {
         const fh = await open(filePath, 'r');
-        const end = Math.max(lastSize, st.size - 1);
-        const stream = fh.createReadStream({ start: lastSize, end });
+        const stream = fh.createReadStream({ start: lastSize, end: st.size });
         const rl = createInterface({ input: stream, crlfDelay: Infinity });
         for await (const line of rl) {
           if (!line) continue;
           try {
             const evt = JSON.parse(line) as EventLine;
-            printLive(evt, lastTsByFlow);
+            printEvent(evt, flowStates, recentFlows);
           } catch {
             // ignore bad lines
           }
@@ -158,9 +198,8 @@ async function tail(filePath: string, opts: { fromStart: boolean }): Promise<voi
         lastSize = st.size;
       }
     } catch {
-      // ignore missing file until it appears
       if (!warnedMissing) {
-        process.stdout.write(`waiting for ${filePath}...\n`);
+        process.stdout.write(`${c.dim}waiting for ${filePath}...${c.reset}\n`);
         warnedMissing = true;
       }
     }
@@ -168,35 +207,143 @@ async function tail(filePath: string, opts: { fromStart: boolean }): Promise<voi
   }
 }
 
-function emojiFor(type: string): string {
-  if (type.startsWith('FE.')) return '✨';
-  if (type.startsWith('BE.')) return '⚙️';
-  if (type.startsWith('DB.')) return '🗄️';
-  return '•';
+function printHeader(filePath: string, fromStart: boolean): void {
+  process.stdout.write('\n');
+  process.stdout.write(`${c.bold}${c.cyan}🐕 hound tail${c.reset}\n`);
+  process.stdout.write(
+    `${c.dim}watching: ${filePath}${fromStart ? ' (from start)' : ''}${c.reset}\n`,
+  );
+  process.stdout.write(`${c.dim}${'─'.repeat(60)}${c.reset}\n\n`);
 }
 
-function shortId(id: string): string {
-  return id.length > 8 ? id.slice(0, 8) + '…' : id;
-}
-
-function printLive(evt: EventLine, lastTsByFlow: Map<string, number>): void {
-  const prev = lastTsByFlow.get(evt.flowId) ?? evt.timestampMs;
-  const delta = Math.max(0, Math.round(evt.timestampMs - prev));
-  lastTsByFlow.set(evt.flowId, evt.timestampMs);
-  const parts: string[] = [];
-  parts.push(emojiFor(evt.type));
-  parts.push(evt.type);
-  parts.push(`+${delta}ms`);
-  const extras: string[] = [];
-  if (evt.durationMs != null) extras.push(`dur=${Math.round(evt.durationMs)}ms`);
-  if (evt.status != null) extras.push(`status=${evt.status}`);
-  if (evt.attrs && typeof evt.attrs === 'object') {
-    const a = evt.attrs as Record<string, unknown>;
-    if (a['path']) extras.push(`path=${a['path'] as string}`);
-    if (a['url']) extras.push(`url=${a['url'] as string}`);
-    if (a['model']) extras.push(`model=${a['model'] as string}`);
-    if (a['action']) extras.push(`action=${a['action'] as string}`);
+function layerStyle(type: string): { emoji: string; color: string; label: string } {
+  if (type.startsWith('FE.')) {
+    return { emoji: '🌐', color: c.cyan, label: 'FE' };
   }
-  const suffix = extras.length ? ` [${extras.join(' ')}]` : '';
-  process.stdout.write(`${parts.join(' ')} ${suffix}  (${shortId(evt.flowId)})\n`);
+  if (type.startsWith('BE.')) {
+    return { emoji: '⚡', color: c.yellow, label: 'BE' };
+  }
+  if (type.startsWith('DB.')) {
+    return { emoji: '💾', color: c.magenta, label: 'DB' };
+  }
+  return { emoji: '•', color: c.white, label: '??' };
+}
+
+function statusColor(status: string | number | undefined): string {
+  if (status === undefined) return c.dim;
+  if (typeof status === 'number') {
+    if (status >= 200 && status < 300) return c.green;
+    if (status >= 400) return c.red;
+    return c.yellow;
+  }
+  if (status === 'error' || status === 'closed') return c.red;
+  return c.dim;
+}
+
+function shortFlowId(id: string): string {
+  return id.slice(0, 8);
+}
+
+function flowColor(flowId: string): string {
+  // Consistent color per flow based on hash
+  const colors = [c.cyan, c.yellow, c.magenta, c.green, c.blue] as const;
+  let hash = 0;
+  for (let i = 0; i < flowId.length; i++) {
+    hash = (hash * 31 + flowId.charCodeAt(i)) >>> 0;
+  }
+  return colors[hash % colors.length] ?? c.white;
+}
+
+function printEvent(
+  evt: EventLine,
+  flowStates: Map<string, FlowState>,
+  recentFlows: string[],
+): void {
+  const isNewFlow = !flowStates.has(evt.flowId);
+  const state = flowStates.get(evt.flowId) || {
+    lastTsByService: new Map<string, number>(),
+    eventCount: 0,
+  };
+
+  // Track flow order for visual grouping
+  if (isNewFlow) {
+    recentFlows.unshift(evt.flowId);
+    if (recentFlows.length > 10) recentFlows.pop();
+  }
+
+  // Only compute delta within same service (avoids clock skew across machines)
+  const lastTsForService = state.lastTsByService.get(evt.service);
+  const delta =
+    lastTsForService !== undefined
+      ? Math.max(0, Math.round(evt.timestampMs - lastTsForService))
+      : null;
+  state.lastTsByService.set(evt.service, evt.timestampMs);
+  state.eventCount++;
+  flowStates.set(evt.flowId, state);
+
+  const { emoji, color, label } = layerStyle(evt.type);
+  const fColor = flowColor(evt.flowId);
+  const shortId = shortFlowId(evt.flowId);
+
+  // Build the output line
+  const parts: string[] = [];
+
+  // Flow indicator (new flow gets a special header)
+  if (isNewFlow) {
+    process.stdout.write(
+      `\n${fColor}┌──────────────────────────────────────────────────────────┐${c.reset}\n`,
+    );
+    process.stdout.write(
+      `${fColor}│${c.reset} ${c.bold}Flow ${shortId}${c.reset} ${c.dim}started${c.reset}${' '.repeat(36)}${fColor}│${c.reset}\n`,
+    );
+    process.stdout.write(`${fColor}├${'─'.repeat(58)}┤${c.reset}\n`);
+  }
+
+  // Event type (with layer styling)
+  const eventName = evt.type.replace(/^(FE|BE|DB)\./, '');
+  const typeStr = `${emoji} ${color}${label}${c.reset}${c.dim}.${c.reset}${eventName}`;
+
+  // Delta time (only shown for same-service events to avoid clock skew)
+  let deltaStr = '';
+  if (delta !== null) {
+    deltaStr = delta > 0 ? `${c.dim}+${delta}ms${c.reset}` : `${c.dim}+0ms${c.reset}`;
+  }
+
+  // Status if present
+  let statusStr = '';
+  if (evt.status !== undefined) {
+    const sColor = statusColor(evt.status);
+    statusStr = ` ${sColor}${evt.status}${c.reset}`;
+  }
+
+  // Duration if present
+  let durStr = '';
+  if (evt.durationMs !== undefined) {
+    durStr = ` ${c.dim}(${Math.round(evt.durationMs)}ms)${c.reset}`;
+  }
+
+  // Key attrs
+  const attrs = evt.attrs as Record<string, unknown> | undefined;
+  let attrStr = '';
+  if (attrs) {
+    const attrParts: string[] = [];
+    if (attrs['path']) attrParts.push(`${c.dim}path=${c.reset}${attrs['path']}`);
+    if (attrs['url']) {
+      const url = String(attrs['url']);
+      const shortUrl = url.length > 40 ? url.slice(0, 40) + '…' : url;
+      attrParts.push(`${c.dim}url=${c.reset}${shortUrl}`);
+    }
+    if (attrs['method']) attrParts.push(`${c.dim}${attrs['method']}${c.reset}`);
+    if (attrParts.length) attrStr = ` ${attrParts.join(' ')}`;
+  }
+
+  // Print event line with flow border
+  process.stdout.write(
+    `${fColor}│${c.reset} ${typeStr}${statusStr}${durStr}${attrStr} ${deltaStr}\n`,
+  );
+
+  // Check if this looks like a flow-ending event
+  if (evt.type.endsWith('.end') && evt.type.startsWith('FE.http')) {
+    process.stdout.write(`${fColor}└${'─'.repeat(58)}┘${c.reset}\n`);
+  }
 }

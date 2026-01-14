@@ -20,10 +20,9 @@ export function houndMiddleware() {
     res.setHeader(cfg.propagationHeader, flowId);
 
     void withFlow(
-      flowId,
       () =>
         new Promise<void>((resolve) => {
-          void mark('BE.http.start', {
+          void mark('BE.http.received', {
             method: req.method,
             path: req.path,
           });
@@ -62,6 +61,7 @@ export function houndMiddleware() {
 
           next();
         }),
+      flowId,
     );
   };
 }

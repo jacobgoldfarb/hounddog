@@ -69,3 +69,53 @@
 {"flowId":"mkdk8s1f-w8tjo5dm","type":"BE.work.end","timestampMs":1768367319092.7195,"service":"app"}
 {"flowId":"mkdk8s1f-w8tjo5dm","type":"BE.http.end","timestampMs":1768367319093.283,"service":"app","attrs":{"status":304,"durationMs":52.170624999998836}}
 {"flowId":"mkdk8s1f-w8tjo5dm","type":"FE.http.end","timestampMs":1768367319094.5999,"service":"web","attrs":{"url":"http://localhost:4000/api/hello","status":200,"durationMs":66.60000002384186}}
+{"flowId":"mkdkg7mr-oti5qypz","type":"FE.http.start","timestampMs":1768367665829.4,"service":"web","attrs":{"url":"http://localhost:4000/api/hello"}}
+{"flowId":"mkdkg7mr-oti5qypz","type":"BE.http.start","timestampMs":1768367665856.8635,"service":"app","attrs":{"method":"GET","path":"/api/hello"}}
+{"flowId":"mkdkg7mr-oti5qypz","type":"BE.work.start","timestampMs":1768367665856.897,"service":"app"}
+{"flowId":"mkdkg7mr-oti5qypz","type":"BE.work.end","timestampMs":1768367665907.851,"service":"app"}
+{"flowId":"mkdkg7mr-oti5qypz","type":"BE.http.end","timestampMs":1768367665913.683,"service":"app","attrs":{"status":304,"durationMs":56.80991700000595}}
+{"flowId":"mkdkg7mr-oti5qypz","type":"FE.http.end","timestampMs":1768367665914.4,"service":"web","attrs":{"url":"http://localhost:4000/api/hello","status":200,"durationMs":85}}
+{"flowId":"mkdksfat-x13jto8m","type":"FE.http.sent","timestampMs":1768368235637.7998,"service":"web","attrs":{"url":"http://localhost:4000/api/hello"}}
+{"flowId":"mkdksfat-x13jto8m","type":"BE.http.start","timestampMs":1768368235618.4565,"service":"app","attrs":{"method":"GET","path":"/api/hello"}}
+{"flowId":"mkdksfat-x13jto8m","type":"BE.work.start","timestampMs":1768368235618.495,"service":"app"}
+{"flowId":"mkdksfat-x13jto8m","type":"BE.work.end","timestampMs":1768368235669.2769,"service":"app"}
+{"flowId":"mkdksfat-x13jto8m","type":"BE.http.end","timestampMs":1768368235677.2285,"service":"app","attrs":{"status":304,"durationMs":58.80595900001936}}
+{"flowId":"mkdksfat-x13jto8m","type":"FE.http.end","timestampMs":1768368235710.7,"service":"web","attrs":{"url":"http://localhost:4000/api/hello","status":200,"durationMs":72.89999997615814}}
+{"flowId":"mkdksk6r-2ftoo1xz","type":"FE.http.sent","timestampMs":1768368241971.4,"service":"web","attrs":{"url":"http://localhost:4000/api/hello"}}
+{"flowId":"mkdksk6r-2ftoo1xz","type":"BE.http.start","timestampMs":1768368241945.6292,"service":"app","attrs":{"method":"GET","path":"/api/hello"}}
+{"flowId":"mkdksk6r-2ftoo1xz","type":"BE.work.start","timestampMs":1768368241945.6467,"service":"app"}
+{"flowId":"mkdksk6r-2ftoo1xz","type":"BE.work.end","timestampMs":1768368241997.0188,"service":"app"}
+{"flowId":"mkdksk6r-2ftoo1xz","type":"BE.http.end","timestampMs":1768368241998.0159,"service":"app","attrs":{"status":304,"durationMs":52.40462500008289}}
+{"flowId":"mkdksk6r-2ftoo1xz","type":"FE.http.end","timestampMs":1768368242038.7,"service":"web","attrs":{"url":"http://localhost:4000/api/hello","status":200,"durationMs":67.20000004768372}}
+{"flowId":"mkdksptz-5nsbg2dp","type":"FE.http.sent","timestampMs":1768368249287.5,"service":"web","attrs":{"url":"http://localhost:4000/api/hello"}}
+{"flowId":"mkdksptz-5nsbg2dp","type":"BE.http.start","timestampMs":1768368249253.8835,"service":"app","attrs":{"method":"GET","path":"/api/hello"}}
+{"flowId":"mkdksptz-5nsbg2dp","type":"BE.work.start","timestampMs":1768368249253.907,"service":"app"}
+{"flowId":"mkdksptz-5nsbg2dp","type":"BE.work.end","timestampMs":1768368249304.1484,"service":"app"}
+{"flowId":"mkdksptz-5nsbg2dp","type":"BE.http.end","timestampMs":1768368249304.4976,"service":"app","attrs":{"status":304,"durationMs":50.62741700001061}}
+{"flowId":"mkdksptz-5nsbg2dp","type":"FE.http.end","timestampMs":1768368249344.4,"service":"web","attrs":{"url":"http://localhost:4000/api/hello","status":200,"durationMs":57}}
+{"flowId":"jacob flow","type":"FE.http.sent","timestampMs":1768368264405.4001,"service":"web","attrs":{"url":"http://localhost:4000/api/hello"}}
+{"flowId":"jacob flow","type":"BE.http.start","timestampMs":1768368264379.9978,"service":"app","attrs":{"method":"GET","path":"/api/hello"}}
+{"flowId":"jacob flow","type":"BE.work.start","timestampMs":1768368264380.033,"service":"app"}
+{"flowId":"jacob flow","type":"BE.work.end","timestampMs":1768368264431.3665,"service":"app"}
+{"flowId":"jacob flow","type":"BE.http.end","timestampMs":1768368264431.8997,"service":"app","attrs":{"status":304,"durationMs":51.910250000073574}}
+{"flowId":"jacob flow","type":"FE.http.end","timestampMs":1768368264471.9001,"service":"web","attrs":{"url":"http://localhost:4000/api/hello","status":200,"durationMs":66.69999992847443}}
+{"flowId":"my-label","type":"FE.http.sent","timestampMs":1768368282123.3,"service":"web","attrs":{"url":"http://localhost:4000/api/hello"}}
+{"flowId":"my-label","type":"BE.http.start","timestampMs":1768368282095.2227,"service":"app","attrs":{"method":"GET","path":"/api/hello"}}
+{"flowId":"my-label","type":"BE.work.start","timestampMs":1768368282095.265,"service":"app"}
+{"flowId":"my-label","type":"BE.work.end","timestampMs":1768368282146.4507,"service":"app"}
+{"flowId":"my-label","type":"BE.http.end","timestampMs":1768368282146.7314,"service":"app","attrs":{"status":304,"durationMs":51.53129199997056}}
+{"flowId":"my-label","type":"FE.http.end","timestampMs":1768368282186.7,"service":"web","attrs":{"url":"http://localhost:4000/api/hello","status":200,"durationMs":63.5}}
+{"flowId":"mkdktwdh-o15arwl8","type":"FE.button.click","timestampMs":1768368304421.1,"service":"web"}
+{"flowId":"mkdktwdh-o15arwl8","type":"FE.http.sent","timestampMs":1768368304433.1,"service":"web","attrs":{"url":"http://localhost:4000/api/hello"}}
+{"flowId":"mkdktwdh-o15arwl8","type":"BE.http.start","timestampMs":1768368304397.2434,"service":"app","attrs":{"method":"GET","path":"/api/hello"}}
+{"flowId":"mkdktwdh-o15arwl8","type":"BE.work.start","timestampMs":1768368304397.3462,"service":"app"}
+{"flowId":"mkdktwdh-o15arwl8","type":"BE.work.end","timestampMs":1768368304448.641,"service":"app"}
+{"flowId":"mkdktwdh-o15arwl8","type":"BE.http.end","timestampMs":1768368304448.9004,"service":"app","attrs":{"status":304,"durationMs":51.70000000006985}}
+{"flowId":"mkdktwdh-o15arwl8","type":"FE.http.end","timestampMs":1768368304489,"service":"web","attrs":{"url":"http://localhost:4000/api/hello","status":200,"durationMs":56}}
+{"flowId":"mkdkvnpl-vyhdwzrw","type":"FE.button.click","timestampMs":1768368386505.4,"service":"web"}
+{"flowId":"mkdkvnpl-vyhdwzrw","type":"FE.http.sent","timestampMs":1768368386532.4,"service":"web","attrs":{"url":"http://localhost:4000/api/hello"}}
+{"flowId":"mkdkvnpl-vyhdwzrw","type":"BE.http.start","timestampMs":1768368386500.7275,"service":"app","attrs":{"method":"GET","path":"/api/hello"}}
+{"flowId":"mkdkvnpl-vyhdwzrw","type":"BE.work.start","timestampMs":1768368386500.8352,"service":"app"}
+{"flowId":"mkdkvnpl-vyhdwzrw","type":"BE.work.end","timestampMs":1768368386551.8188,"service":"app"}
+{"flowId":"mkdkvnpl-vyhdwzrw","type":"BE.http.end","timestampMs":1768368386552.3354,"service":"app","attrs":{"status":304,"durationMs":51.67583300010301}}
+{"flowId":"mkdkvnpl-vyhdwzrw","type":"FE.http.end","timestampMs":1768368386592.9,"service":"web","attrs":{"url":"http://localhost:4000/api/hello","status":200,"durationMs":60.5}}

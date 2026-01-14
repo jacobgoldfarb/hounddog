@@ -1,10 +1,10 @@
 let flowIdStack: string[] = [];
 
 export function withFlow<WrappedFnReturnType>(
-  flowId: string,
   fn: () => WrappedFnReturnType,
+  flowId?: string,
 ): WrappedFnReturnType {
-  flowIdStack.push(flowId);
+  flowIdStack.push(flowId || makeFlowId());
   let isSync = true;
   try {
     const result = fn();

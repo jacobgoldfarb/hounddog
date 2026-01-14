@@ -1,4 +1,4 @@
-import { configureHounddog } from '@hounddog/core';
+import { configureHounddog, mark, withFlow } from '@hounddog/core';
 import { enableHoundFetch } from '@hounddog/fetch';
 
 configureHounddog({
@@ -13,8 +13,9 @@ enableHoundFetch({ baseFetch: fetch });
 
 const btn = document.getElementById('btn') as HTMLButtonElement;
 const out = document.getElementById('out') as HTMLDivElement;
+const btnMark = document.getElementById('btn-mark') as HTMLButtonElement;
 
-btn.addEventListener('click', async () => {
+const callApi = async () => {
   out.textContent = 'Calling API...';
   try {
     const res = await fetch('http://localhost:4000/api/hello');
@@ -23,4 +24,16 @@ btn.addEventListener('click', async () => {
   } catch (e) {
     out.textContent = 'Error: ' + (e as Error).message;
   }
+};
+btn.addEventListener('click', async () => {
+  await callApi();
 });
+
+const markBtn = async () => {
+  withFlow(async () => {
+    await mark('FE.button.click');
+    await callApi();
+  }, 'slow-turtle');
+};
+
+btnMark.addEventListener('click', markBtn);

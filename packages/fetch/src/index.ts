@@ -15,9 +15,9 @@ export function houndFetch(baseFetch: typeof fetch): typeof fetch {
       return await doFetchWithMarks(baseFetch, input, init);
     }
     const newFlowId = makeFlowId();
-    return await withFlow(newFlowId, async () => {
+    return await withFlow(async () => {
       return await doFetchWithMarks(baseFetch, input, init);
-    });
+    }, newFlowId);
   };
 }
 
@@ -58,8 +58,8 @@ async function doFetchWithMarks(
   }
   const nextInit: RequestInit = { ...(init || {}), headers };
 
-  await mark('FE.http.start', { url });
   try {
+    await mark('FE.http.sent', { url });
     const res = await baseFetch(input as any, nextInit);
     await mark('FE.http.end', {
       url,

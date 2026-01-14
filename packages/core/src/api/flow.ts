@@ -1,61 +1,52 @@
 import { clock } from '../lib/clock.js';
-import { getConfig } from '../lib/config.js';
 import { withFlow, makeFlowId } from '../lib/context.js';
+import { buildFlowEvent } from '../lib/event-builder.js';
 import { emitEvent } from '../sink/manager.js';
 
 /**
- * Start a new root flow and execute a function within it.
- *
+ * Execute a function within a new flow.
  * Emits `<name>.start` and `<name>.end` events.
- * Returns the result of the function.
  *
- * @param name - Flow name (used as event prefix)
- * @param fn - Function to execute within the flow
- * @param attrs - Optional attributes for start/end events
+ * @example
+ * ```ts
+ * const result = await run('process-order', async () => {
+ *   // ... work ...
+ *   return order;
+ * });
+ * ```
  */
 export async function run<T>(
   name: string,
   fn: () => Promise<T> | T,
   attrs?: Record<string, unknown>,
 ): Promise<T> {
-  const cfg = getConfig();
   const flowId = makeFlowId();
   const startPerf = clock.nowPerfMs();
-  const startTs = clock.nowEpochMs();
 
   return withFlow(async () => {
-    await emitEvent({
-      flowId,
-      type: `${name}.start`,
-      timestampMs: startTs,
-      service: cfg.service,
-      componentTag: cfg.componentTag,
-      attrs,
-    });
+    // Emit start
+    await emitEvent(buildFlowEvent(flowId, `${name}.start`, attrs));
 
     try {
       return await fn();
     } finally {
-      await emitEvent({
-        flowId,
-        type: `${name}.end`,
-        timestampMs: clock.nowEpochMs(),
-        service: cfg.service,
-        componentTag: cfg.componentTag,
-        durationMs: clock.nowPerfMs() - startPerf,
-        attrs,
-      });
+      // Emit end with duration
+      const durationMs = clock.nowPerfMs() - startPerf;
+      await emitEvent(buildFlowEvent(flowId, `${name}.end`, attrs, durationMs));
     }
   }, flowId);
 }
 
 /**
- * Start a frontend action flow.
- * Convenience wrapper that prefixes name with "FE.action.".
+ * Execute a frontend action within a new flow.
+ * Convenience wrapper that prefixes with "FE.action.".
  *
- * @param name - Action name
- * @param fn - Function to execute
- * @param attrs - Optional attributes
+ * @example
+ * ```ts
+ * await action('submit-form', async () => {
+ *   await fetch('/api/submit', { method: 'POST' });
+ * });
+ * ```
  */
 export async function action<T>(
   name: string,
@@ -64,4 +55,3 @@ export async function action<T>(
 ): Promise<T> {
   return run(`FE.action.${name}`, fn, attrs);
 }
-

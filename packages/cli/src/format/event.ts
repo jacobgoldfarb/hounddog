@@ -46,15 +46,15 @@ function inferIcon(type: string, status?: string | number): EventIcon | null {
 }
 
 export function getLayerStyle(type: string, icon?: EventIcon, status?: string | number): LayerStyle {
-  if (icon && iconStyles[icon]) return iconStyles[icon];
+  if (icon) return iconStyles[icon]!;
 
   const prefix = type.split('.')[0] ?? '';
   if (prefix in prefixStyles) return prefixStyles[prefix]!;
 
   const inferred = inferIcon(type, status);
-  if (inferred) return iconStyles[inferred];
+  if (inferred) return iconStyles[inferred]!;
 
-  return iconStyles.work;
+  return iconStyles.work!;
 }
 
 /**

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { clock } from '../src/clock';
+import { clock } from '../src/lib/clock.js';
 
 describe('clock', () => {
   it('provides epoch ms and monotonic ms', async () => {

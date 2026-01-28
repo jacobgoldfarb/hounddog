@@ -36,9 +36,10 @@ export async function run<T>(
     try {
       return await fn();
     } finally {
-      // Emit end with duration
       const durationMs = clock.nowPerfMs() - startPerf;
-      await emitEvent(buildFlowEvent(flowId, `${name}.end`, attrs, durationMs, label));
+      const endEvent = buildFlowEvent(flowId, `${name}.end`, attrs, durationMs, label);
+      endEvent.flowTerminal = true;
+      await emitEvent(endEvent);
     }
   }, flowId);
 }

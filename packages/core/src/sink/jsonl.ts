@@ -1,6 +1,6 @@
 import { mkdirSync, readdirSync, statSync, unlinkSync } from 'node:fs';
 import { appendFile, rename, writeFile } from 'node:fs/promises';
-import { dirname, join } from 'node:path';
+import { basename, dirname, join } from 'node:path';
 import { getConfig } from '../lib/config.js';
 import type { HoundEvent } from '../types';
 import type { Sink } from './types';
@@ -73,11 +73,11 @@ export class JsonlSink implements Sink {
   private enforceRetention(): void {
     if (this.retainFiles <= 0) return;
     const dir = dirname(this.filePath);
-    const base = this.filePath.split('/').slice(-1)[0];
+    const base = basename(this.filePath);
     const rotated = readdirSync(dir)
-      .filter((f: any) => f.startsWith(base + '.'))
-      .map((f: any) => ({ f, t: statSync(join(dir, f)).mtimeMs }))
-      .sort((a: any, b: any) => b.t - a.t);
+      .filter((f) => f.startsWith(base + '.'))
+      .map((f) => ({ f, t: statSync(join(dir, f)).mtimeMs }))
+      .sort((a, b) => b.t - a.t);
     for (let i = this.retainFiles - 1; i < rotated.length; i++) {
       const item = rotated[i];
       if (!item) continue;

@@ -1,6 +1,7 @@
 import { clock, mark } from '@tailchi/core';
 
 const MAX_SQL_PREVIEW = 100;
+const QUERY_EVENT_STALENESS_MS = 50;
 
 function truncateSql(sql: string): string {
   if (sql.length <= MAX_SQL_PREVIEW) return sql;
@@ -36,7 +37,7 @@ export function instrumentPrisma<T extends PrismaClientLike>(client: T): T {
           try {
             const result = await query(args);
             const durationMs = clock.nowPerfMs() - startPerf;
-            const sql = lastQuery && clock.nowPerfMs() - lastQuery.ts < 50
+            const sql = lastQuery && clock.nowPerfMs() - lastQuery.ts < QUERY_EVENT_STALENESS_MS
               ? truncateSql(lastQuery.sql)
               : undefined;
 

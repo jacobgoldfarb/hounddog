@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { mark, run } from '../src/api';
-import { getFlowId } from '../src/context';
+import { mark, run } from '../src/api/index.js';
+import { getFlowId } from '../src/lib/context.js';
 
 describe('api', () => {
   it('run creates a flow and tears it down', async () => {

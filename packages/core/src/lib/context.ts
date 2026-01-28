@@ -32,26 +32,20 @@ export function withFlow<T>(fn: () => T, options?: WithFlowOptions | string): T 
   const ctx = normalizeFlowOptions(options);
   flowStack.push(ctx);
 
-  let isSync = true;
   try {
     const result = fn();
 
-    // Handle async functions
     if (result && typeof (result as any).then === 'function') {
-      isSync = false;
       return (result as any).finally(() => {
         flowStack.pop();
       });
     }
 
+    flowStack.pop();
     return result;
   } catch (err) {
     flowStack.pop();
     throw err;
-  } finally {
-    if (isSync) {
-      flowStack.pop();
-    }
   }
 }
 

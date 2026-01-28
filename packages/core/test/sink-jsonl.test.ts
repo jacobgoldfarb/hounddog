@@ -1,9 +1,9 @@
 import { describe, it, expect } from 'vitest';
 import { readFile, stat, readdir, rm, mkdir } from 'node:fs/promises';
-import { dirname, join } from 'node:path';
-import { configureHounddog } from '../src/config';
-import { mark, run } from '../src/api';
-import { flushSink, closeSink } from '../src/sink/index';
+import { basename, dirname, join } from 'node:path';
+import { configureHounddog } from '../src/lib/config';
+import { mark, run } from '../src/api/index';
+import { flushSink, closeSink } from '../src/sink/manager';
 
 async function readLines(file: string): Promise<string[]> {
   try {
@@ -69,7 +69,7 @@ describe('JSONL sink', () => {
       await flushSink();
     }
     const files = await readdir(dir);
-    const base = filePath.split('/').slice(-1)[0];
+    const base = basename(filePath);
     const rotated = files.filter((f: string) => f.startsWith(base + '.'));
     // retainFiles=2 keeps 2 rotated plus active file
     expect(rotated.length).toBeLessThanOrEqual(2);

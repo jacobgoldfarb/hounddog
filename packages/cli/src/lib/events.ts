@@ -26,9 +26,6 @@ export interface EventLine {
   icon?: EventIcon;
 }
 
-/**
- * Read all events from a JSONL file.
- */
 export async function readEvents(filePath: string): Promise<EventLine[]> {
   try {
     const buf = await readFile(filePath, 'utf8');
@@ -38,7 +35,7 @@ export async function readEvents(filePath: string): Promise<EventLine[]> {
       try {
         out.push(JSON.parse(line));
       } catch {
-        // Skip malformed lines
+        // skip malformed
       }
     }
     return out;
@@ -47,9 +44,6 @@ export async function readEvents(filePath: string): Promise<EventLine[]> {
   }
 }
 
-/**
- * Parse a single JSON line into an event.
- */
 export function parseEventLine(line: string): EventLine | null {
   try {
     return JSON.parse(line) as EventLine;

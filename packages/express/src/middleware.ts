@@ -4,7 +4,7 @@ import { HOUND_EVENTS_PATH } from './constants.js';
 import { handleEventsRequest } from './events-handler.js';
 
 /**
- * Create Hounddog middleware for Express.
+ * Create tailchi middleware for Express.
  *
  * - Extracts or creates flow ID for each request
  * - Emits BE.http.received and BE.http.end events

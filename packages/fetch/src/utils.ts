@@ -1,10 +1,10 @@
 /**
- * Internal Hounddog request path prefix.
+ * Internal tailchi request path prefix.
  */
 const HOUND_INTERNAL_PREFIX = '/__hound/';
 
 /**
- * Check if a URL is a Hounddog internal request (should not be instrumented).
+ * Check if a URL is a tailchi internal request (should not be instrumented).
  */
 export function isHoundInternalRequest(url: string): boolean {
   return url.includes(HOUND_INTERNAL_PREFIX);

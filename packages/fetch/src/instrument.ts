@@ -10,7 +10,7 @@ import {
 import { normalizeUrl, isHoundInternalRequest } from './utils.js';
 
 /**
- * Wrap a fetch function with Hounddog instrumentation.
+ * Wrap a fetch function with tailchi instrumentation.
  *
  * - Propagates flow ID via headers
  * - Emits FE.http.sent and FE.http.end events

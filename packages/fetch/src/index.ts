@@ -1,7 +1,7 @@
 import { instrumentFetch } from './instrument.js';
 
 /**
- * Enable Hounddog instrumentation for fetch requests.
+ * Enable tailchi instrumentation for fetch requests.
  *
  * Patches globalThis.fetch so all fetch calls are automatically instrumented.
  * Returns the instrumented fetch function.

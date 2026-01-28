@@ -38,7 +38,7 @@ export function getConfig(): HoundConfig {
 }
 
 /**
- * Check if Hounddog is enabled.
+ * Check if tailchi is enabled.
  */
 export function isEnabled(): boolean {
   return currentConfig.enabled;

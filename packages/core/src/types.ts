@@ -11,7 +11,7 @@ export type EventIcon =
   | 'info';
 
 /**
- * Event emitted by Hounddog.
+ * Event emitted by tailchi.
  *
  * Notes:
  * - `timestampMs` is wall-clock epoch milliseconds for cross-service ordering.
@@ -45,7 +45,7 @@ export type HoundEvent = {
 };
 
 /**
- * Runtime configuration for Hounddog core.
+ * Runtime configuration for tailchi core.
  */
 export type HoundConfig = {
   /** Enables/disables event emission globally. */

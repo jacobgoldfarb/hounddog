@@ -192,3 +192,212 @@
 {"flowId":"mkxkchom-5y13d6pr","type":"BE.work.end","timestampMs":1769576815809.1726,"service":"app"}
 {"flowId":"mkxkchom-5y13d6pr","type":"BE.http.end","timestampMs":1769576815809.3826,"service":"app","attrs":{"status":304,"durationMs":51.341624999884516}}
 {"flowId":"mkxkchom-5y13d6pr","type":"http.response","timestampMs":1769576815807.1,"service":"web","attrs":{"url":"http://localhost:4000/api/hello"},"durationMs":53.800000071525574,"status":200,"flowTerminal":true}
+{"flowId":"mkxko3bu-gmjsguz7","type":"http.sent","timestampMs":1769577357019.5999,"service":"web","attrs":{"url":"http://localhost:4000/api/hello"}}
+{"flowId":"mkxko3bu-gmjsguz7","type":"http.received","timestampMs":1769577357052.0276,"service":"app","attrs":{"method":"GET","path":"/api/hello"}}
+{"flowId":"mkxko3bu-gmjsguz7","type":"work.start","timestampMs":1769577357052.2432,"service":"app"}
+{"flowId":"mkxko3bu-gmjsguz7","type":"work.end","timestampMs":1769577357103.729,"service":"app"}
+{"flowId":"mkxko3bu-gmjsguz7","type":"http.responded","timestampMs":1769577357104.4753,"service":"app","durationMs":52.69350000000122,"status":304}
+{"flowId":"mkxko3bu-gmjsguz7","type":"http.response","timestampMs":1769577357105.0999,"service":"web","attrs":{"url":"http://localhost:4000/api/hello"},"durationMs":85.89999997615814,"status":200,"flowTerminal":true}
+{"flowId":"mkxko4le-1zxnu7ns","type":"http.sent","timestampMs":1769577358658.9,"service":"web","attrs":{"url":"http://localhost:4000/api/hello"}}
+{"flowId":"mkxko4le-1zxnu7ns","type":"http.received","timestampMs":1769577358667.467,"service":"app","attrs":{"method":"GET","path":"/api/hello"}}
+{"flowId":"mkxko4le-1zxnu7ns","type":"work.start","timestampMs":1769577358667.5156,"service":"app"}
+{"flowId":"mkxko4le-1zxnu7ns","type":"work.end","timestampMs":1769577358718.2969,"service":"app"}
+{"flowId":"mkxko4le-1zxnu7ns","type":"http.responded","timestampMs":1769577358718.6077,"service":"app","durationMs":51.20733299999847,"status":304}
+{"flowId":"mkxko4le-1zxnu7ns","type":"http.response","timestampMs":1769577358719.3,"service":"web","attrs":{"url":"http://localhost:4000/api/hello"},"durationMs":60.39999997615814,"status":200,"flowTerminal":true}
+{"flowId":"mkxko5v0-eaywyw8b","type":"button.click","timestampMs":1769577360300.8,"service":"web"}
+{"flowId":"mkxko5v0-eaywyw8b","type":"http.sent","timestampMs":1769577360304.3,"service":"web","attrs":{"url":"http://localhost:4000/api/hello"}}
+{"flowId":"mkxko5v0-eaywyw8b","type":"http.received","timestampMs":1769577360306.3438,"service":"app","attrs":{"method":"GET","path":"/api/hello"}}
+{"flowId":"mkxko5v0-eaywyw8b","type":"work.start","timestampMs":1769577360306.4685,"service":"app"}
+{"flowId":"mkxko5v0-eaywyw8b","type":"work.end","timestampMs":1769577360359.376,"service":"app"}
+{"flowId":"mkxko5v0-eaywyw8b","type":"http.responded","timestampMs":1769577360363.0579,"service":"app","durationMs":56.73725000000559,"status":304}
+{"flowId":"mkxko5v0-eaywyw8b","type":"http.response","timestampMs":1769577360362.0999,"service":"web","attrs":{"url":"http://localhost:4000/api/hello"},"durationMs":57.800000071525574,"status":200,"flowTerminal":true}
+{"flowId":"mkxko9pu-rvd5l063","type":"http.sent","timestampMs":1769577365298.5999,"service":"web","attrs":{"url":"http://localhost:4000/api/users"}}
+{"flowId":"mkxko9pu-rvd5l063","type":"http.received","timestampMs":1769577365304.0193,"service":"app","attrs":{"method":"GET","path":"/api/users"}}
+{"flowId":"mkxkp9m0-wto5f8u3","type":"http.sent","timestampMs":1769577411816.9,"service":"web","attrs":{"url":"http://localhost:4000/api/users"}}
+{"flowId":"mkxkp9m0-wto5f8u3","type":"http.received","timestampMs":1769577411836.3123,"service":"app","attrs":{"method":"GET","path":"/api/users"}}
+{"flowId":"mkxkp9m0-wto5f8u3","type":"db.findMany","timestampMs":1769577411851.0627,"service":"app","attrs":{"model":"User","sql":"SELECT \"public\".\"User\".\"id\", \"public\".\"User\".\"email\", \"public\".\"User\".\"name\", \"public\".\"User\".\"creat…"},"durationMs":13.787665999999945}
+{"flowId":"mkxkp9m0-wto5f8u3","type":"http.responded","timestampMs":1769577411851.5798,"service":"app","durationMs":15.469875000000002,"status":200}
+{"flowId":"mkxkp9m0-wto5f8u3","type":"http.response","timestampMs":1769577411852.3,"service":"web","attrs":{"url":"http://localhost:4000/api/users"},"durationMs":35.39999997615814,"status":200,"flowTerminal":true}
+{"flowId":"mkxkpba4-8ftaqxj8","type":"button.click","timestampMs":1769577413980.5999,"service":"web"}
+{"flowId":"mkxkpba4-8ftaqxj8","type":"http.sent","timestampMs":1769577413983.5,"service":"web","attrs":{"url":"http://localhost:4000/api/hello"}}
+{"flowId":"mkxkpba4-8ftaqxj8","type":"http.received","timestampMs":1769577413987.7227,"service":"app","attrs":{"method":"GET","path":"/api/hello"}}
+{"flowId":"mkxkpba4-8ftaqxj8","type":"work.start","timestampMs":1769577413987.8403,"service":"app"}
+{"flowId":"mkxkpba4-8ftaqxj8","type":"work.end","timestampMs":1769577414038.6802,"service":"app"}
+{"flowId":"mkxkpba4-8ftaqxj8","type":"http.responded","timestampMs":1769577414039.1396,"service":"app","durationMs":51.49599999999964,"status":304}
+{"flowId":"mkxkpba4-8ftaqxj8","type":"http.response","timestampMs":1769577414040,"service":"web","attrs":{"url":"http://localhost:4000/api/hello"},"durationMs":56.5,"status":200,"flowTerminal":true}
+{"flowId":"mkxkpbnc-3ceor7k4","type":"http.sent","timestampMs":1769577414456.5,"service":"web","attrs":{"url":"http://localhost:4000/api/users"}}
+{"flowId":"mkxkpbnc-3ceor7k4","type":"http.received","timestampMs":1769577414460.7678,"service":"app","attrs":{"method":"GET","path":"/api/users"}}
+{"flowId":"mkxkpbnc-3ceor7k4","type":"db.findMany","timestampMs":1769577414466.223,"service":"app","attrs":{"model":"User","sql":"SELECT \"public\".\"User\".\"id\", \"public\".\"User\".\"email\", \"public\".\"User\".\"name\", \"public\".\"User\".\"creat…"},"durationMs":5.110708000000159}
+{"flowId":"mkxkpbnc-3ceor7k4","type":"http.responded","timestampMs":1769577414466.5432,"service":"app","durationMs":5.798917000000074,"status":304}
+{"flowId":"mkxkpbnc-3ceor7k4","type":"http.response","timestampMs":1769577414467.4,"service":"web","attrs":{"url":"http://localhost:4000/api/users"},"durationMs":10.799999952316284,"status":200,"flowTerminal":true}
+{"flowId":"mkxkpc1l-es47v2gl","flowLabel":"get-users","type":"button.click","timestampMs":1769577414969.5,"service":"web"}
+{"flowId":"mkxkpc1l-es47v2gl","flowLabel":"get-users","type":"http.sent","timestampMs":1769577414971.8,"service":"web","attrs":{"url":"http://localhost:4000/api/users"}}
+{"flowId":"mkxkpc1l-es47v2gl","type":"http.received","timestampMs":1769577414973.7793,"service":"app","attrs":{"method":"GET","path":"/api/users"}}
+{"flowId":"mkxkpc1l-es47v2gl","type":"db.findMany","timestampMs":1769577414974.5698,"service":"app","attrs":{"model":"User","sql":"SELECT \"public\".\"User\".\"id\", \"public\".\"User\".\"email\", \"public\".\"User\".\"name\", \"public\".\"User\".\"creat…"},"durationMs":0.6655839999998534}
+{"flowId":"mkxkpc1l-es47v2gl","type":"http.responded","timestampMs":1769577414974.7434,"service":"app","durationMs":0.9902910000000702,"status":304}
+{"flowId":"mkxkpc1l-es47v2gl","flowLabel":"get-users","type":"http.response","timestampMs":1769577414975.3,"service":"web","attrs":{"url":"http://localhost:4000/api/users"},"durationMs":3.5,"status":200,"flowTerminal":true}
+{"flowId":"mkxkpcki-t1sj02vp","flowLabel":"get-users","type":"button.click","timestampMs":1769577415650.3,"service":"web"}
+{"flowId":"mkxkpcki-t1sj02vp","flowLabel":"get-users","type":"http.sent","timestampMs":1769577415652.3,"service":"web","attrs":{"url":"http://localhost:4000/api/users"}}
+{"flowId":"mkxkpcki-t1sj02vp","type":"http.received","timestampMs":1769577415654.438,"service":"app","attrs":{"method":"GET","path":"/api/users"}}
+{"flowId":"mkxkpcki-t1sj02vp","type":"db.findMany","timestampMs":1769577415655.2048,"service":"app","attrs":{"model":"User","sql":"SELECT \"public\".\"User\".\"id\", \"public\".\"User\".\"email\", \"public\".\"User\".\"name\", \"public\".\"User\".\"creat…"},"durationMs":0.6471250000004147}
+{"flowId":"mkxkpcki-t1sj02vp","type":"http.responded","timestampMs":1769577415655.3467,"service":"app","durationMs":0.9334159999998519,"status":304}
+{"flowId":"mkxkpcki-t1sj02vp","flowLabel":"get-users","type":"http.response","timestampMs":1769577415655.9,"service":"web","attrs":{"url":"http://localhost:4000/api/users"},"durationMs":3.600000023841858,"status":200,"flowTerminal":true}
+{"flowId":"mkxkpfn3-ag4ez3im","flowLabel":"get-users","type":"button.click","timestampMs":1769577419632,"service":"web"}
+{"flowId":"mkxkpfn3-ag4ez3im","flowLabel":"get-users","type":"http.sent","timestampMs":1769577419636,"service":"web","attrs":{"url":"http://localhost:4000/api/users"}}
+{"flowId":"mkxkpfn3-ag4ez3im","type":"http.received","timestampMs":1769577419640.396,"service":"app","attrs":{"method":"GET","path":"/api/users"}}
+{"flowId":"mkxkpfn3-ag4ez3im","type":"db.findMany","timestampMs":1769577419642.3826,"service":"app","attrs":{"model":"User","sql":"SELECT \"public\".\"User\".\"id\", \"public\".\"User\".\"email\", \"public\".\"User\".\"name\", \"public\".\"User\".\"creat…"},"durationMs":1.7869169999994483}
+{"flowId":"mkxkpfn3-ag4ez3im","type":"http.responded","timestampMs":1769577419642.6018,"service":"app","durationMs":2.2341250000008586,"status":304}
+{"flowId":"mkxkpfn3-ag4ez3im","flowLabel":"get-users","type":"http.response","timestampMs":1769577419643.2,"service":"web","attrs":{"url":"http://localhost:4000/api/users"},"durationMs":7.199999928474426,"status":200,"flowTerminal":true}
+{"flowId":"mkxkpk91-iic20863","type":"http.sent","timestampMs":1769577425605.5999,"service":"web","attrs":{"url":"http://localhost:4000/api/users"}}
+{"flowId":"mkxkpk91-iic20863","type":"http.received","timestampMs":1769577425610.6309,"service":"app","attrs":{"method":"GET","path":"/api/users"}}
+{"flowId":"mkxkpk91-iic20863","type":"db.findMany","timestampMs":1769577425614.259,"service":"app","attrs":{"model":"User","sql":"SELECT \"public\".\"User\".\"id\", \"public\".\"User\".\"email\", \"public\".\"User\".\"name\", \"public\".\"User\".\"creat…"},"durationMs":3.481375000001208}
+{"flowId":"mkxkpk91-iic20863","type":"http.responded","timestampMs":1769577425614.611,"service":"app","durationMs":4.003416999999899,"status":304}
+{"flowId":"mkxkpk91-iic20863","type":"http.response","timestampMs":1769577425615.4,"service":"web","attrs":{"url":"http://localhost:4000/api/users"},"durationMs":9.799999952316284,"status":200,"flowTerminal":true}
+{"flowId":"mkxkplc2-pi13lwre","type":"button.click","timestampMs":1769577427010.7,"service":"web"}
+{"flowId":"mkxkplc2-pi13lwre","type":"http.sent","timestampMs":1769577427014.5999,"service":"web","attrs":{"url":"http://localhost:4000/api/hello"}}
+{"flowId":"mkxkplc2-pi13lwre","type":"http.received","timestampMs":1769577427019.1865,"service":"app","attrs":{"method":"GET","path":"/api/hello"}}
+{"flowId":"mkxkplc2-pi13lwre","type":"work.start","timestampMs":1769577427019.2231,"service":"app"}
+{"flowId":"mkxkplc2-pi13lwre","type":"work.end","timestampMs":1769577427070.3708,"service":"app"}
+{"flowId":"mkxkplc2-pi13lwre","type":"http.responded","timestampMs":1769577427070.6135,"service":"app","durationMs":51.44908399999986,"status":304}
+{"flowId":"mkxkplc2-pi13lwre","type":"http.response","timestampMs":1769577427072.0999,"service":"web","attrs":{"url":"http://localhost:4000/api/hello"},"durationMs":57.60000002384186,"status":200,"flowTerminal":true}
+{"flowId":"mkxkpmbi-pmptnuns","type":"http.sent","timestampMs":1769577428286.5999,"service":"web","attrs":{"url":"http://localhost:4000/api/users"}}
+{"flowId":"mkxkpmbi-pmptnuns","type":"http.received","timestampMs":1769577428290.0667,"service":"app","attrs":{"method":"GET","path":"/api/users"}}
+{"flowId":"mkxkpmbi-pmptnuns","type":"db.findMany","timestampMs":1769577428292.269,"service":"app","attrs":{"model":"User","sql":"SELECT \"public\".\"User\".\"id\", \"public\".\"User\".\"email\", \"public\".\"User\".\"name\", \"public\".\"User\".\"creat…"},"durationMs":1.7660829999986163}
+{"flowId":"mkxkpmbi-pmptnuns","type":"http.responded","timestampMs":1769577428292.4846,"service":"app","durationMs":2.4385409999995318,"status":304}
+{"flowId":"mkxkpmbi-pmptnuns","type":"http.response","timestampMs":1769577428293.0999,"service":"web","attrs":{"url":"http://localhost:4000/api/users"},"durationMs":6.600000023841858,"status":200,"flowTerminal":true}
+{"flowId":"mkxkqrjp-fsgjmg8s","type":"http.sent","timestampMs":1769577481717.9,"service":"web","attrs":{"url":"http://localhost:4000/api/users"}}
+{"flowId":"mkxkqrjp-fsgjmg8s","type":"http.received","timestampMs":1769577481730.5898,"service":"app","attrs":{"method":"GET","path":"/api/users"}}
+{"flowId":"mkxkqrjp-fsgjmg8s","type":"db.findMany","timestampMs":1769577481734.6135,"service":"app","attrs":{"model":"User","sql":"SELECT \"public\".\"User\".\"id\", \"public\".\"User\".\"email\", \"public\".\"User\".\"name\", \"public\".\"User\".\"creat…"},"durationMs":3.735666000007768}
+{"flowId":"mkxkqrjp-fsgjmg8s","type":"http.responded","timestampMs":1769577481734.8105,"service":"app","durationMs":4.260374999998021,"status":304}
+{"flowId":"mkxkqrjp-fsgjmg8s","type":"http.response","timestampMs":1769577481735.5,"service":"web","attrs":{"url":"http://localhost:4000/api/users"},"durationMs":17.600000023841858,"status":200,"flowTerminal":true}
+{"flowId":"mkxkryfl-j1azzc5v","type":"http.sent","timestampMs":1769577537297.9,"service":"web","attrs":{"url":"http://localhost:4000/api/users"}}
+{"flowId":"mkxkryfl-j1azzc5v","type":"http.received","timestampMs":1769577537309.4985,"service":"app","attrs":{"method":"GET","path":"/api/users"}}
+{"flowId":"mkxkryfl-j1azzc5v","type":"db.findMany","timestampMs":1769577537346.0947,"service":"app","attrs":{"model":"User","sql":"SELECT \"public\".\"User\".\"id\", \"public\".\"User\".\"email\", \"public\".\"User\".\"name\", \"public\".\"User\".\"creat…"},"durationMs":36.22087499999907}
+{"flowId":"mkxkryfl-j1azzc5v","type":"http.responded","timestampMs":1769577537346.421,"service":"app","durationMs":36.976167000000714,"status":304}
+{"flowId":"mkxkryfl-j1azzc5v","type":"http.response","timestampMs":1769577537347.3,"service":"web","attrs":{"url":"http://localhost:4000/api/users"},"durationMs":49.5,"status":200,"flowTerminal":true}
+{"flowId":"mkxkrz69-v8cyxw44","flowLabel":"get-users","type":"button.click","timestampMs":1769577538257.5,"service":"web"}
+{"flowId":"mkxkrz69-v8cyxw44","flowLabel":"get-users","type":"http.sent","timestampMs":1769577538259.5,"service":"web","attrs":{"url":"http://localhost:4000/api/users"}}
+{"flowId":"mkxkrz69-v8cyxw44","type":"http.received","timestampMs":1769577538261.6108,"service":"app","attrs":{"method":"GET","path":"/api/users"}}
+{"flowId":"mkxkrz69-v8cyxw44","type":"db.findMany","timestampMs":1769577538262.8987,"service":"app","attrs":{"model":"User","sql":"SELECT \"public\".\"User\".\"id\", \"public\".\"User\".\"email\", \"public\".\"User\".\"name\", \"public\".\"User\".\"creat…"},"durationMs":1.1435420000052545}
+{"flowId":"mkxkrz69-v8cyxw44","type":"http.responded","timestampMs":1769577538263.0652,"service":"app","durationMs":1.469249999994645,"status":304}
+{"flowId":"mkxkrz69-v8cyxw44","flowLabel":"get-users","type":"http.response","timestampMs":1769577538263.7,"service":"web","attrs":{"url":"http://localhost:4000/api/users"},"durationMs":4.199999928474426,"status":200,"flowTerminal":true}
+{"flowId":"mkxks10i-n8yz0sdq","type":"http.sent","timestampMs":1769577540642.5999,"service":"web","attrs":{"url":"http://localhost:4000/api/users"}}
+{"flowId":"mkxks10i-n8yz0sdq","type":"http.received","timestampMs":1769577540647.0083,"service":"app","attrs":{"method":"GET","path":"/api/users"}}
+{"flowId":"mkxks10i-n8yz0sdq","type":"db.findMany","timestampMs":1769577540650.1306,"service":"app","attrs":{"model":"User","sql":"SELECT \"public\".\"User\".\"id\", \"public\".\"User\".\"email\", \"public\".\"User\".\"name\", \"public\".\"User\".\"creat…"},"durationMs":2.791708999997354}
+{"flowId":"mkxks10i-n8yz0sdq","type":"http.responded","timestampMs":1769577540650.354,"service":"app","durationMs":3.3653750000084983,"status":304}
+{"flowId":"mkxks10i-n8yz0sdq","type":"http.response","timestampMs":1769577540651.0999,"service":"web","attrs":{"url":"http://localhost:4000/api/users"},"durationMs":8.5,"status":200,"flowTerminal":true}
+{"flowId":"mkxks1if-mbvx1jyp","flowLabel":"get-users","type":"button.click","timestampMs":1769577541288.2,"service":"web"}
+{"flowId":"mkxks1if-mbvx1jyp","flowLabel":"get-users","type":"http.sent","timestampMs":1769577541290.8,"service":"web","attrs":{"url":"http://localhost:4000/api/users"}}
+{"flowId":"mkxks1if-mbvx1jyp","type":"http.received","timestampMs":1769577541292.4575,"service":"app","attrs":{"method":"GET","path":"/api/users"}}
+{"flowId":"mkxks1if-mbvx1jyp","type":"db.findMany","timestampMs":1769577541293.2688,"service":"app","attrs":{"model":"User","sql":"SELECT \"public\".\"User\".\"id\", \"public\".\"User\".\"email\", \"public\".\"User\".\"name\", \"public\".\"User\".\"creat…"},"durationMs":0.7177919999958249}
+{"flowId":"mkxks1if-mbvx1jyp","type":"http.responded","timestampMs":1769577541293.3782,"service":"app","durationMs":0.9344169999967562,"status":304}
+{"flowId":"mkxks1if-mbvx1jyp","flowLabel":"get-users","type":"http.response","timestampMs":1769577541293.9,"service":"web","attrs":{"url":"http://localhost:4000/api/users"},"durationMs":3.100000023841858,"status":200,"flowTerminal":true}
+{"flowId":"mkxkt63g-9ebkmn0k","type":"http.sent","timestampMs":1769577593884.5,"service":"web","attrs":{"url":"http://localhost:4000/api/users"}}
+{"flowId":"mkxkt63g-9ebkmn0k","type":"http.received","timestampMs":1769577593893.9585,"service":"app","attrs":{"method":"GET","path":"/api/users"}}
+{"flowId":"mkxkt63g-9ebkmn0k","type":"db.findMany","timestampMs":1769577593912.6218,"service":"app","attrs":{"model":"User","sql":"SELECT \"public\".\"User\".\"id\", \"public\".\"User\".\"email\", \"public\".\"User\".\"name\", \"public\".\"User\".\"creat…"},"durationMs":18.31204200000502}
+{"flowId":"mkxkt63g-9ebkmn0k","type":"http.responded","timestampMs":1769577593912.8474,"service":"app","durationMs":18.948042000003625,"status":304}
+{"flowId":"mkxkt63g-9ebkmn0k","type":"http.response","timestampMs":1769577593913.7,"service":"web","attrs":{"url":"http://localhost:4000/api/users"},"durationMs":29.199999928474426,"status":200,"flowTerminal":true}
+{"flowId":"mkxkt8ah-ohzewr5d","flowLabel":"get-users","type":"button.click","timestampMs":1769577596729.5999,"service":"web"}
+{"flowId":"mkxkt8ah-ohzewr5d","flowLabel":"get-users","type":"http.sent","timestampMs":1769577596731.8,"service":"web","attrs":{"url":"http://localhost:4000/api/users"}}
+{"flowId":"mkxkt8ah-ohzewr5d","type":"http.received","timestampMs":1769577596734.267,"service":"app","attrs":{"method":"GET","path":"/api/users"}}
+{"flowId":"mkxkt8ah-ohzewr5d","type":"db.findMany","timestampMs":1769577596734.9993,"service":"app","attrs":{"model":"User","sql":"SELECT \"public\".\"User\".\"id\", \"public\".\"User\".\"email\", \"public\".\"User\".\"name\", \"public\".\"User\".\"creat…"},"durationMs":0.657041999977082}
+{"flowId":"mkxkt8ah-ohzewr5d","type":"http.responded","timestampMs":1769577596735.1038,"service":"app","durationMs":0.8529170000110753,"status":304}
+{"flowId":"mkxkt8ah-ohzewr5d","flowLabel":"get-users","type":"http.response","timestampMs":1769577596735.5999,"service":"web","attrs":{"url":"http://localhost:4000/api/users"},"durationMs":3.8000000715255737,"status":200,"flowTerminal":true}
+{"flowId":"mkxktuuk-v4clvwwr","type":"button.click","timestampMs":1769577625965,"service":"web"}
+{"flowId":"mkxktuuk-v4clvwwr","type":"http.sent","timestampMs":1769577625982.8,"service":"web","attrs":{"url":"http://localhost:4000/api/hello"}}
+{"flowId":"mkxktuuk-v4clvwwr","type":"http.received","timestampMs":1769577625986.4905,"service":"app","attrs":{"method":"GET","path":"/api/hello"}}
+{"flowId":"mkxktuuk-v4clvwwr","type":"work.start","timestampMs":1769577625986.7354,"service":"app"}
+{"flowId":"mkxktuuk-v4clvwwr","type":"work.end","timestampMs":1769577626036.7786,"service":"app"}
+{"flowId":"mkxktuuk-v4clvwwr","type":"http.responded","timestampMs":1769577626037.3198,"service":"app","durationMs":51.03050000000076,"status":304}
+{"flowId":"mkxktuuk-v4clvwwr","type":"http.response","timestampMs":1769577626038.2,"service":"web","attrs":{"url":"http://localhost:4000/api/hello"},"durationMs":55.39999997615814,"status":200,"flowTerminal":true}
+{"flowId":"mkxktvwe-fr1gv1ky","type":"http.sent","timestampMs":1769577627326.7,"service":"web","attrs":{"url":"http://localhost:4000/api/users"}}
+{"flowId":"mkxktvwe-fr1gv1ky","type":"http.received","timestampMs":1769577627331.183,"service":"app","attrs":{"method":"GET","path":"/api/users"}}
+{"flowId":"mkxktvwe-fr1gv1ky","type":"db.findMany","timestampMs":1769577627332.3174,"service":"app","attrs":{"model":"User"}}
+{"flowId":"mkxktvwe-fr1gv1ky","type":"db.findMany.done","timestampMs":1769577627345.1775,"service":"app","attrs":{"model":"User","sql":"SELECT \"public\".\"User\".\"id\", \"public\".\"User\".\"email\", \"public\".\"User\".\"name\", \"public\".\"User\".\"creat…"},"durationMs":12.820959000000585}
+{"flowId":"mkxktvwe-fr1gv1ky","type":"http.responded","timestampMs":1769577627345.508,"service":"app","durationMs":14.38012499999968,"status":304}
+{"flowId":"mkxktvwe-fr1gv1ky","type":"http.response","timestampMs":1769577627346.3,"service":"web","attrs":{"url":"http://localhost:4000/api/users"},"durationMs":19.600000023841858,"status":200,"flowTerminal":true}
+{"flowId":"mkxktxrh-m7h5nlp0","type":"button.click","timestampMs":1769577629741.5999,"service":"web"}
+{"flowId":"mkxktxrh-m7h5nlp0","type":"http.sent","timestampMs":1769577629744.4,"service":"web","attrs":{"url":"http://localhost:4000/api/hello"}}
+{"flowId":"mkxktxrh-m7h5nlp0","type":"http.received","timestampMs":1769577629746.4285,"service":"app","attrs":{"method":"GET","path":"/api/hello"}}
+{"flowId":"mkxktxrh-m7h5nlp0","type":"work.start","timestampMs":1769577629746.536,"service":"app"}
+{"flowId":"mkxktxrh-m7h5nlp0","type":"work.end","timestampMs":1769577629797.7532,"service":"app"}
+{"flowId":"mkxktxrh-m7h5nlp0","type":"http.responded","timestampMs":1769577629798.046,"service":"app","durationMs":51.650041999997484,"status":304}
+{"flowId":"mkxktxrh-m7h5nlp0","type":"http.response","timestampMs":1769577629799,"service":"web","attrs":{"url":"http://localhost:4000/api/hello"},"durationMs":54.60000002384186,"status":200,"flowTerminal":true}
+{"flowId":"mkxktzjl-a5gqxuuv","type":"http.sent","timestampMs":1769577632049.5999,"service":"web","attrs":{"url":"http://localhost:4000/api/hello"}}
+{"flowId":"mkxktzjl-a5gqxuuv","type":"http.received","timestampMs":1769577632054.0547,"service":"app","attrs":{"method":"GET","path":"/api/hello"}}
+{"flowId":"mkxktzjl-a5gqxuuv","type":"work.start","timestampMs":1769577632054.0735,"service":"app"}
+{"flowId":"mkxktzjl-a5gqxuuv","type":"work.end","timestampMs":1769577632104.9155,"service":"app"}
+{"flowId":"mkxktzjl-a5gqxuuv","type":"http.responded","timestampMs":1769577632105.157,"service":"app","durationMs":51.114541999999346,"status":304}
+{"flowId":"mkxktzjl-a5gqxuuv","type":"http.response","timestampMs":1769577632106.0999,"service":"web","attrs":{"url":"http://localhost:4000/api/hello"},"durationMs":56.60000002384186,"status":200,"flowTerminal":true}
+{"flowId":"mkxktzyu-rdwncgx5","type":"button.click","timestampMs":1769577632599.2,"service":"web"}
+{"flowId":"mkxktzyu-rdwncgx5","type":"http.sent","timestampMs":1769577632601.7,"service":"web","attrs":{"url":"http://localhost:4000/api/hello"}}
+{"flowId":"mkxktzyu-rdwncgx5","type":"http.received","timestampMs":1769577632603.6592,"service":"app","attrs":{"method":"GET","path":"/api/hello"}}
+{"flowId":"mkxktzyu-rdwncgx5","type":"work.start","timestampMs":1769577632603.681,"service":"app"}
+{"flowId":"mkxktzyu-rdwncgx5","type":"work.end","timestampMs":1769577632654.8208,"service":"app"}
+{"flowId":"mkxktzyu-rdwncgx5","type":"http.responded","timestampMs":1769577632655.0535,"service":"app","durationMs":51.416832999999315,"status":304}
+{"flowId":"mkxktzyu-rdwncgx5","type":"http.response","timestampMs":1769577632655.9,"service":"web","attrs":{"url":"http://localhost:4000/api/hello"},"durationMs":54.200000047683716,"status":200,"flowTerminal":true}
+{"flowId":"mkxku0if-4uts2x7w","type":"http.sent","timestampMs":1769577633303.7,"service":"web","attrs":{"url":"http://localhost:4000/api/users"}}
+{"flowId":"mkxku0if-4uts2x7w","type":"http.received","timestampMs":1769577633309.5896,"service":"app","attrs":{"method":"GET","path":"/api/users"}}
+{"flowId":"mkxku0if-4uts2x7w","type":"db.findMany","timestampMs":1769577633309.7644,"service":"app","attrs":{"model":"User"}}
+{"flowId":"mkxku0if-4uts2x7w","type":"db.findMany.done","timestampMs":1769577633311.0454,"service":"app","attrs":{"model":"User","sql":"SELECT \"public\".\"User\".\"id\", \"public\".\"User\".\"email\", \"public\".\"User\".\"name\", \"public\".\"User\".\"creat…"},"durationMs":1.266790999998193}
+{"flowId":"mkxku0if-4uts2x7w","type":"http.responded","timestampMs":1769577633311.2021,"service":"app","durationMs":1.6287499999998545,"status":304}
+{"flowId":"mkxku0if-4uts2x7w","type":"http.response","timestampMs":1769577633311.9,"service":"web","attrs":{"url":"http://localhost:4000/api/users"},"durationMs":8.200000047683716,"status":200,"flowTerminal":true}
+{"flowId":"mkxku2b1-xcahb5oc","type":"button.click","timestampMs":1769577635629.4,"service":"web"}
+{"flowId":"mkxku2b1-xcahb5oc","type":"http.sent","timestampMs":1769577635632.3,"service":"web","attrs":{"url":"http://localhost:4000/api/hello"}}
+{"flowId":"mkxku2b1-xcahb5oc","type":"http.received","timestampMs":1769577635633.9675,"service":"app","attrs":{"method":"GET","path":"/api/hello"}}
+{"flowId":"mkxku2b1-xcahb5oc","type":"work.start","timestampMs":1769577635633.9888,"service":"app"}
+{"flowId":"mkxku2b1-xcahb5oc","type":"work.end","timestampMs":1769577635686.382,"service":"app"}
+{"flowId":"mkxku2b1-xcahb5oc","type":"http.responded","timestampMs":1769577635686.8936,"service":"app","durationMs":52.946499999998196,"status":304}
+{"flowId":"mkxku2b1-xcahb5oc","type":"http.response","timestampMs":1769577635688.3,"service":"web","attrs":{"url":"http://localhost:4000/api/hello"},"durationMs":56.10000002384186,"status":200,"flowTerminal":true}
+{"flowId":"mkxku3vo-wcbl5liy","type":"http.sent","timestampMs":1769577637669,"service":"web","attrs":{"url":"http://localhost:4000/api/users"}}
+{"flowId":"mkxku3vo-wcbl5liy","type":"http.received","timestampMs":1769577637673.5151,"service":"app","attrs":{"method":"GET","path":"/api/users"}}
+{"flowId":"mkxku3vo-wcbl5liy","type":"db.findMany","timestampMs":1769577637673.7964,"service":"app","attrs":{"model":"User"}}
+{"flowId":"mkxku3vo-wcbl5liy","type":"db.findMany.done","timestampMs":1769577637674.7131,"service":"app","attrs":{"model":"User","sql":"SELECT \"public\".\"User\".\"id\", \"public\".\"User\".\"email\", \"public\".\"User\".\"name\", \"public\".\"User\".\"creat…"},"durationMs":0.8964169999999285}
+{"flowId":"mkxku3vo-wcbl5liy","type":"http.responded","timestampMs":1769577637674.8665,"service":"app","durationMs":1.3693329999987327,"status":304}
+{"flowId":"mkxku3vo-wcbl5liy","type":"http.response","timestampMs":1769577637675.7,"service":"web","attrs":{"url":"http://localhost:4000/api/users"},"durationMs":6.699999928474426,"status":200,"flowTerminal":true}
+{"flowId":"mkxku6ow-f320h7m4","type":"button.click","timestampMs":1769577641313,"service":"web"}
+{"flowId":"mkxku6ow-f320h7m4","type":"http.sent","timestampMs":1769577641315,"service":"web","attrs":{"url":"http://localhost:4000/api/hello"}}
+{"flowId":"mkxku6ow-f320h7m4","type":"http.received","timestampMs":1769577641318.1306,"service":"app","attrs":{"method":"GET","path":"/api/hello"}}
+{"flowId":"mkxku6ow-f320h7m4","type":"work.start","timestampMs":1769577641318.1602,"service":"app"}
+{"flowId":"mkxku6ow-f320h7m4","type":"work.end","timestampMs":1769577641368.7654,"service":"app"}
+{"flowId":"mkxku6ow-f320h7m4","type":"http.responded","timestampMs":1769577641369.0005,"service":"app","durationMs":50.90041599999677,"status":304}
+{"flowId":"mkxku6ow-f320h7m4","type":"http.response","timestampMs":1769577641369.9,"service":"web","attrs":{"url":"http://localhost:4000/api/hello"},"durationMs":54.89999997615814,"status":200,"flowTerminal":true}
+{"flowId":"mkxku8ku-yevn776r","type":"http.sent","timestampMs":1769577643758.7,"service":"web","attrs":{"url":"http://localhost:4000/api/users"}}
+{"flowId":"mkxku8ku-yevn776r","type":"http.received","timestampMs":1769577643765.5269,"service":"app","attrs":{"method":"GET","path":"/api/users"}}
+{"flowId":"mkxku8ku-yevn776r","type":"db.findMany","timestampMs":1769577643765.6992,"service":"app","attrs":{"model":"User"}}
+{"flowId":"mkxku8ku-yevn776r","type":"db.findMany.done","timestampMs":1769577643768.2556,"service":"app","attrs":{"model":"User","sql":"SELECT \"public\".\"User\".\"id\", \"public\".\"User\".\"email\", \"public\".\"User\".\"name\", \"public\".\"User\".\"creat…"},"durationMs":2.5399170000018785}
+{"flowId":"mkxku8ku-yevn776r","type":"http.responded","timestampMs":1769577643768.478,"service":"app","durationMs":2.9737499999973807,"status":304}
+{"flowId":"mkxku8ku-yevn776r","type":"http.response","timestampMs":1769577643769.4,"service":"web","attrs":{"url":"http://localhost:4000/api/users"},"durationMs":10.700000047683716,"status":200,"flowTerminal":true}
+{"flowId":"mkxku9q2-ctlc9z58","flowLabel":"get-users","type":"button.click","timestampMs":1769577645243.3,"service":"web"}
+{"flowId":"mkxku9q2-ctlc9z58","flowLabel":"get-users","type":"http.sent","timestampMs":1769577645245.4,"service":"web","attrs":{"url":"http://localhost:4000/api/users"}}
+{"flowId":"mkxku9q2-ctlc9z58","type":"http.received","timestampMs":1769577645246.8342,"service":"app","attrs":{"method":"GET","path":"/api/users"}}
+{"flowId":"mkxku9q2-ctlc9z58","type":"db.findMany","timestampMs":1769577645246.9497,"service":"app","attrs":{"model":"User"}}
+{"flowId":"mkxku9q2-ctlc9z58","type":"db.findMany.done","timestampMs":1769577645250.191,"service":"app","attrs":{"model":"User","sql":"SELECT \"public\".\"User\".\"id\", \"public\".\"User\".\"email\", \"public\".\"User\".\"name\", \"public\".\"User\".\"creat…"},"durationMs":3.2286669999957667}
+{"flowId":"mkxku9q2-ctlc9z58","type":"http.responded","timestampMs":1769577645250.392,"service":"app","durationMs":3.5759170000019367,"status":304}
+{"flowId":"mkxku9q2-ctlc9z58","flowLabel":"get-users","type":"http.response","timestampMs":1769577645251.2,"service":"web","attrs":{"url":"http://localhost:4000/api/users"},"durationMs":5.799999952316284,"status":200,"flowTerminal":true}
+{"flowId":"mkxkuaxb-wkshyj6e","type":"http.sent","timestampMs":1769577646800.2,"service":"web","attrs":{"url":"http://localhost:4000/api/users"}}
+{"flowId":"mkxkuaxb-wkshyj6e","type":"http.received","timestampMs":1769577646803.8867,"service":"app","attrs":{"method":"GET","path":"/api/users"}}
+{"flowId":"mkxkuaxb-wkshyj6e","type":"db.findMany","timestampMs":1769577646804.0774,"service":"app","attrs":{"model":"User"}}
+{"flowId":"mkxkuaxb-wkshyj6e","type":"db.findMany.done","timestampMs":1769577646805.8916,"service":"app","attrs":{"model":"User","sql":"SELECT \"public\".\"User\".\"id\", \"public\".\"User\".\"email\", \"public\".\"User\".\"name\", \"public\".\"User\".\"creat…"},"durationMs":1.8034169999955338}
+{"flowId":"mkxkuaxb-wkshyj6e","type":"http.responded","timestampMs":1769577646806.3303,"service":"app","durationMs":2.4616249999962747,"status":304}
+{"flowId":"mkxkuaxb-wkshyj6e","type":"http.response","timestampMs":1769577646807.3,"service":"web","attrs":{"url":"http://localhost:4000/api/users"},"durationMs":7.100000023841858,"status":200,"flowTerminal":true}
+{"flowId":"mkxkubdq-nh8p4u3d","type":"button.click","timestampMs":1769577647391,"service":"web"}
+{"flowId":"mkxkubdq-nh8p4u3d","type":"http.sent","timestampMs":1769577647393.7,"service":"web","attrs":{"url":"http://localhost:4000/api/hello"}}
+{"flowId":"mkxkubdq-nh8p4u3d","type":"http.received","timestampMs":1769577647395.7253,"service":"app","attrs":{"method":"GET","path":"/api/hello"}}
+{"flowId":"mkxkubdq-nh8p4u3d","type":"work.start","timestampMs":1769577647395.7524,"service":"app"}
+{"flowId":"mkxkubdq-nh8p4u3d","type":"work.end","timestampMs":1769577647446.8835,"service":"app"}
+{"flowId":"mkxkubdq-nh8p4u3d","type":"http.responded","timestampMs":1769577647447.1025,"service":"app","durationMs":51.394334000004164,"status":304}
+{"flowId":"mkxkubdq-nh8p4u3d","type":"http.response","timestampMs":1769577647448.0999,"service":"web","attrs":{"url":"http://localhost:4000/api/hello"},"durationMs":54.40000009536743,"status":200,"flowTerminal":true}
+{"flowId":"mkxkuxoe-8swrqimm","type":"button.click","timestampMs":1769577676287.0999,"service":"web"}
+{"flowId":"mkxkuxoe-8swrqimm","type":"http.sent","timestampMs":1769577676293.0999,"service":"web","attrs":{"url":"http://localhost:4000/api/hello"}}
+{"flowId":"mkxkuxoe-8swrqimm","type":"http.received","timestampMs":1769577676295.9673,"service":"app","attrs":{"method":"GET","path":"/api/hello"}}
+{"flowId":"mkxkuxoe-8swrqimm","type":"work.start","timestampMs":1769577676295.9958,"service":"app"}
+{"flowId":"mkxkuxoe-8swrqimm","type":"work.end","timestampMs":1769577676347.189,"service":"app"}
+{"flowId":"mkxkuxoe-8swrqimm","type":"http.responded","timestampMs":1769577676347.592,"service":"app","durationMs":51.676667000007,"status":304}
+{"flowId":"mkxkuxoe-8swrqimm","type":"http.response","timestampMs":1769577676348.5999,"service":"web","attrs":{"url":"http://localhost:4000/api/hello"},"durationMs":55.5,"status":200,"flowTerminal":true}
+{"flowId":"mkxkuydq-i2ys5l7b","type":"http.sent","timestampMs":1769577677199.4,"service":"web","attrs":{"url":"http://localhost:4000/api/users"}}
+{"flowId":"mkxkuydq-i2ys5l7b","type":"http.received","timestampMs":1769577677202.6184,"service":"app","attrs":{"method":"GET","path":"/api/users"}}
+{"flowId":"mkxkuydq-i2ys5l7b","type":"db.findMany","timestampMs":1769577677203.0083,"service":"app","attrs":{"model":"User"}}
+{"flowId":"mkxkuydq-i2ys5l7b","type":"db.findMany.done","timestampMs":1769577677206.7698,"service":"app","attrs":{"model":"User","sql":"SELECT \"public\".\"User\".\"id\", \"public\".\"User\".\"email\", \"public\".\"User\".\"name\", \"public\".\"User\".\"creat…"},"durationMs":3.722750000000815}
+{"flowId":"mkxkuydq-i2ys5l7b","type":"http.responded","timestampMs":1769577677207.0115,"service":"app","durationMs":4.436958999998751,"status":304}
+{"flowId":"mkxkuydq-i2ys5l7b","type":"http.response","timestampMs":1769577677207.9,"service":"web","attrs":{"url":"http://localhost:4000/api/users"},"durationMs":8.399999976158142,"status":200,"flowTerminal":true}

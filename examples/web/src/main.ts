@@ -12,28 +12,39 @@ configureHounddog({
 enableHoundFetch();
 
 const btn = document.getElementById('btn') as HTMLButtonElement;
-const out = document.getElementById('out') as HTMLDivElement;
 const btnMark = document.getElementById('btn-mark') as HTMLButtonElement;
+const btnDb = document.getElementById('btn-db') as HTMLButtonElement;
+const btnMarkDb = document.getElementById('btn-mark-db') as HTMLButtonElement;
+const out = document.getElementById('out') as HTMLDivElement;
 
-const callApi = async () => {
+const callApi = async (endpoint: string) => {
   out.textContent = 'Calling API...';
   try {
-    const res = await fetch('http://localhost:4000/api/hello');
+    const res = await fetch(`http://localhost:4000${endpoint}`);
     const json = await res.json();
     out.textContent = JSON.stringify(json, null, 2);
   } catch (e) {
     out.textContent = 'Error: ' + (e as Error).message;
   }
 };
-btn.addEventListener('click', async () => {
-  await callApi();
-});
 
-const markBtn = async () => {
+btn.addEventListener('click', () => callApi('/api/hello'));
+
+btnMark.addEventListener('click', () => {
   withFlow(async () => {
     await mark('button.click');
-    await callApi();
+    await callApi('/api/hello');
   });
-};
+});
 
-btnMark.addEventListener('click', markBtn);
+btnDb.addEventListener('click', () => callApi('/api/users'));
+
+btnMarkDb.addEventListener('click', () => {
+  withFlow(
+    async () => {
+      await mark('button.click');
+      await callApi('/api/users');
+    },
+    { label: 'get-users' },
+  );
+});

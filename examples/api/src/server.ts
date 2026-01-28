@@ -2,18 +2,22 @@ import express, { type Request, type Response } from 'express';
 import cors from 'cors';
 import { houndMiddleware } from '@hounddog/express';
 import { mark } from '@hounddog/core';
+import { prisma } from './db.js';
 
 const app = express();
 app.use(cors({ origin: true, exposedHeaders: ['x-hound-flow'] }));
-
-// Hounddog middleware - automatically handles /__hound/events for frontend flushes
 app.use(houndMiddleware());
 
 app.get('/api/hello', async (_req: Request, res: Response) => {
-  await mark('BE.work.start');
+  await mark('work.start');
   await new Promise((r) => setTimeout(r, 50));
-  await mark('BE.work.end');
+  await mark('work.end');
   res.json({ message: 'Hello from API' });
+});
+
+app.get('/api/users', async (_req: Request, res: Response) => {
+  const users = await prisma.user.findMany({ take: 10 });
+  res.json({ users });
 });
 
 const port = process.env.PORT ? Number(process.env.PORT) : 4000;

@@ -98,9 +98,6 @@ export function getFlowColor(flowId: string): string {
   return palette[hash % palette.length] ?? c.white;
 }
 
-/**
- * Format event attributes for display.
- */
 export function formatAttrs(attrs: Record<string, unknown> | undefined): string {
   if (!attrs) return '';
 
@@ -116,6 +113,9 @@ export function formatAttrs(attrs: Record<string, unknown> | undefined): string 
     const url = String(attrs['url']);
     const shortUrl = url.length > 40 ? url.slice(0, 40) + '…' : url;
     parts.push(`${c.dim}url=${c.reset}${shortUrl}`);
+  }
+  if (attrs['model']) {
+    parts.push(`${c.dim}table=${c.reset}${attrs['model']}`);
   }
 
   return parts.length ? ` ${parts.join(' ')}` : '';

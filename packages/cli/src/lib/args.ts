@@ -53,7 +53,7 @@ export function parseArgs(argv: string[] = process.argv): ParsedArgs {
   const sinkPath =
     (typeof pathArg === 'string' ? pathArg : undefined) ||
     process.env.HOUNDDOG_SINK_PATH ||
-    '.hounddog/events.jsonl';
+    '.tailchi/events.jsonl';
   const filePath = resolve(process.cwd(), sinkPath);
 
   return { command, subcommand, positional, flags, filePath };

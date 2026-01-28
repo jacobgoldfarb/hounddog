@@ -5,7 +5,7 @@ import { c } from '../lib/colors.js';
  */
 export function runHelp(): void {
   const lines = [
-    `${c.bold}${c.cyan}🐕 hound${c.reset} - request lifecycle tracer`,
+    `${c.bold}${c.cyan}🐕 tailchi${c.reset} - request lifecycle tracer`,
     '',
     `${c.dim}Commands:${c.reset}`,
     `  ${c.yellow}tail${c.reset}                     Stream events in real-time`,
@@ -14,7 +14,7 @@ export function runHelp(): void {
     `  ${c.yellow}flows search${c.reset} --marker X  Search for marker`,
     '',
     `${c.dim}Options:${c.reset}`,
-    `  --path FILE              Log file path (default: .hounddog/events.jsonl)`,
+    `  --path FILE              Log file path (default: .tailchi/events.jsonl)`,
     `  --from-start             Start from beginning of file (tail only)`,
     '',
   ];

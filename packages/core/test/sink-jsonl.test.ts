@@ -15,7 +15,7 @@ async function readLines(file: string): Promise<string[]> {
 }
 
 function uniquePath(): string {
-  const base = `.hounddog/test-events-${Math.random().toString(36).slice(2)}.jsonl`;
+  const base = `.tailchi/test-events-${Math.random().toString(36).slice(2)}.jsonl`;
   return base;
 }
 

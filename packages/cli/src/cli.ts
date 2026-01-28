@@ -23,7 +23,7 @@ async function main(): Promise<void> {
       break;
     default:
       console.error(`Unknown command: ${args.command}`);
-      console.error('Run "hound help" for usage');
+      console.error('Run "tailchi help" for usage');
       process.exitCode = 1;
   }
 }

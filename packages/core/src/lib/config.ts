@@ -8,7 +8,7 @@ const defaultConfig: HoundConfig = {
   orphanMark: 'drop',
   sink: {
     kind: 'jsonl',
-    filePath: '.hounddog/events.jsonl',
+    filePath: '.tailchi/events.jsonl',
     rotateBytes: 5_000_000,
     retainFiles: 3,
     batchMax: 64,

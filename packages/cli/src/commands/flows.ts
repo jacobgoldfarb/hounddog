@@ -39,7 +39,7 @@ function flowsLast(args: ParsedArgs, flows: Flow[]): void {
 
 function flowsShow(flowId: string | undefined, flows: Flow[]): void {
   if (!flowId) {
-    console.error('Usage: hound flows show <flowId>');
+    console.error('Usage: tailchi flows show <flowId>');
     process.exitCode = 1;
     return;
   }
@@ -56,7 +56,7 @@ function flowsShow(flowId: string | undefined, flows: Flow[]): void {
 function flowsSearch(args: ParsedArgs, flows: Flow[]): void {
   const marker = getFlagValue(args, '--marker');
   if (!marker) {
-    console.error('Usage: hound flows search --marker <name>');
+    console.error('Usage: tailchi flows search --marker <name>');
     process.exitCode = 1;
     return;
   }

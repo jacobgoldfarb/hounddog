@@ -8,7 +8,7 @@ import { instrumentFetch } from './instrument.js';
  *
  * @example
  * ```ts
- * import { enableHoundFetch } from '@hounddog/fetch';
+ * import { enableHoundFetch } from '@tailchi/fetch';
  *
  * enableHoundFetch();
  *

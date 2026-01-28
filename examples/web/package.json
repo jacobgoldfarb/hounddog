@@ -3,8 +3,8 @@
   "private": true,
   "type": "module",
   "dependencies": {
-    "@hounddog/core": "workspace:*",
-    "@hounddog/fetch": "workspace:*"
+    "@tailchi/core": "workspace:*",
+    "@tailchi/fetch": "workspace:*"
   },
   "devDependencies": {
     "vite": "^5.4.9",

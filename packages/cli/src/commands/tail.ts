@@ -1,33 +1,55 @@
 import { stat, open } from 'node:fs/promises';
 import { createInterface } from 'node:readline';
+import { createServer, type Server } from 'node:http';
 import { c } from '../lib/colors.js';
 import { parseEventLine, type EventLine } from '../lib/events.js';
 import { formatEventLine, getFlowColor, getFlowDisplayName, box } from '../format/event.js';
-import { hasFlag, type ParsedArgs } from '../lib/args.js';
+import { hasFlag, getFlagValue, type ParsedArgs } from '../lib/args.js';
 
-/**
- * Per-flow state for delta calculations.
- */
 interface FlowState {
-  lastTsByService: Map<string, number>;
+  lastTs: number;
   eventCount: number;
 }
 
-/**
- * Tail options.
- */
 interface TailOptions {
   fromStart: boolean;
+  clockPort: number | null;
 }
 
-/**
- * Run the tail command - stream events in real-time.
- */
+let clockServer: Server | null = null;
+
 export async function runTail(args: ParsedArgs): Promise<void> {
+  const portStr = getFlagValue(args, '--clock-port');
   const options: TailOptions = {
     fromStart: hasFlag(args, '--from-start'),
+    clockPort: portStr ? parseInt(portStr, 10) : 9999,
   };
+
+  if (options.clockPort) {
+    clockServer = startClockServer(options.clockPort);
+  }
+
   await streamEvents(args.filePath, options);
+}
+
+function startClockServer(port: number): Server {
+  const server = createServer((req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Content-Type', 'application/json');
+
+    if (req.url === '/clock') {
+      res.end(JSON.stringify({ epochMs: Date.now() }));
+    } else {
+      res.statusCode = 404;
+      res.end('{}');
+    }
+  });
+
+  server.listen(port, () => {
+    process.stdout.write(`${c.dim}clock daemon: http://localhost:${port}/clock${c.reset}\n`);
+  });
+
+  return server;
 }
 
 async function streamEvents(filePath: string, opts: TailOptions): Promise<void> {
@@ -47,10 +69,12 @@ async function streamEvents(filePath: string, opts: TailOptions): Promise<void> 
 
   process.on('SIGINT', () => {
     running = false;
+    if (clockServer) clockServer.close();
     process.stdout.write(`\n${c.dim}stopped${c.reset}\n`);
+    process.exit(0);
   });
 
-  printHeader(filePath, opts.fromStart);
+  printHeader(filePath, opts);
 
   while (running) {
     try {
@@ -92,12 +116,10 @@ async function streamEvents(filePath: string, opts: TailOptions): Promise<void> 
   }
 }
 
-function printHeader(filePath: string, fromStart: boolean): void {
+function printHeader(filePath: string, opts: TailOptions): void {
   process.stdout.write('\n');
-  process.stdout.write(`${c.bold}${c.cyan}🐕 hound tail${c.reset}\n`);
-  process.stdout.write(
-    `${c.dim}watching: ${filePath}${fromStart ? ' (from start)' : ''}${c.reset}\n`,
-  );
+  process.stdout.write(`${c.bold}${c.cyan}🥋 tailchi${c.reset}\n`);
+  process.stdout.write(`${c.dim}watching: ${filePath}${opts.fromStart ? ' (from start)' : ''}${c.reset}\n`);
   process.stdout.write(`${c.dim}${'─'.repeat(60)}${c.reset}\n\n`);
 }
 
@@ -108,23 +130,17 @@ function printEvent(
 ): void {
   const isNewFlow = !flowStates.has(evt.flowId);
   const state = flowStates.get(evt.flowId) || {
-    lastTsByService: new Map<string, number>(),
+    lastTs: evt.timestampMs,
     eventCount: 0,
   };
 
-  // Track flow order
   if (isNewFlow) {
     recentFlows.unshift(evt.flowId);
     if (recentFlows.length > 10) recentFlows.pop();
   }
 
-  // Compute delta (only within same service to avoid clock skew)
-  const lastTsForService = state.lastTsByService.get(evt.service);
-  const delta =
-    lastTsForService !== undefined
-      ? Math.max(0, Math.round(evt.timestampMs - lastTsForService))
-      : null;
-  state.lastTsByService.set(evt.service, evt.timestampMs);
+  const delta = isNewFlow ? 0 : Math.max(0, Math.round(evt.timestampMs - state.lastTs));
+  state.lastTs = evt.timestampMs;
   state.eventCount++;
   flowStates.set(evt.flowId, state);
 

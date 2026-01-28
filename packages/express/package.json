@@ -1,5 +1,5 @@
 {
-  "name": "@hounddog/express",
+  "name": "@tailchi/express",
   "version": "0.1.0",
   "private": false,
   "type": "module",
@@ -21,11 +21,11 @@
     "clean": "rm -rf dist"
   },
   "peerDependencies": {
-    "@hounddog/core": "*",
+    "@tailchi/core": "*",
     "express": "^4 || ^5"
   },
   "devDependencies": {
-    "@hounddog/core": "workspace:*",
+    "@tailchi/core": "workspace:*",
     "@types/express": "^5.0.6"
   }
 }

@@ -6,7 +6,7 @@ import {
   withFlow,
   mark,
   markAndEndFlow,
-} from '@hounddog/core';
+} from '@tailchi/core';
 import { normalizeUrl, isHoundInternalRequest } from './utils.js';
 
 /**

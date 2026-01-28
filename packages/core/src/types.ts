@@ -60,6 +60,8 @@ export type HoundConfig = {
   orphanMark: 'drop' | 'createFlow';
   /** Sink configuration (default: local JSONL). */
   sink?: HoundSinkConfig;
+  /** Clock daemon URL for synchronized timestamps in dev (e.g., http://localhost:9999). */
+  clockDaemon?: string;
 };
 
 export type HoundSinkConfig =

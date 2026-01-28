@@ -39,18 +39,18 @@ importers:
 
   examples/api:
     dependencies:
-      '@hounddog/core':
-        specifier: workspace:*
-        version: link:../../packages/core
-      '@hounddog/express':
-        specifier: workspace:*
-        version: link:../../packages/express
-      '@hounddog/prisma':
-        specifier: workspace:*
-        version: link:../../packages/prisma
       '@prisma/client':
         specifier: ^6.3.1
         version: 6.19.2(prisma@6.19.2(typescript@5.9.3))(typescript@5.9.3)
+      '@tailchi/core':
+        specifier: workspace:*
+        version: link:../../packages/core
+      '@tailchi/express':
+        specifier: workspace:*
+        version: link:../../packages/express
+      '@tailchi/prisma':
+        specifier: workspace:*
+        version: link:../../packages/prisma
       cors:
         specifier: ^2.8.5
         version: 2.8.5
@@ -67,10 +67,10 @@ importers:
 
   examples/web:
     dependencies:
-      '@hounddog/core':
+      '@tailchi/core':
         specifier: workspace:*
         version: link:../../packages/core
-      '@hounddog/fetch':
+      '@tailchi/fetch':
         specifier: workspace:*
         version: link:../../packages/fetch
     devDependencies:
@@ -91,7 +91,7 @@ importers:
         specifier: ^4 || ^5
         version: 4.22.1
     devDependencies:
-      '@hounddog/core':
+      '@tailchi/core':
         specifier: workspace:*
         version: link:../core
       '@types/express':
@@ -100,18 +100,18 @@ importers:
 
   packages/fetch:
     devDependencies:
-      '@hounddog/core':
+      '@tailchi/core':
         specifier: workspace:*
         version: link:../core
 
   packages/prisma:
     devDependencies:
-      '@hounddog/core':
-        specifier: workspace:*
-        version: link:../core
       '@prisma/client':
         specifier: ^6.3.1
         version: 6.19.2(prisma@6.19.2(typescript@5.9.3))(typescript@5.9.3)
+      '@tailchi/core':
+        specifier: workspace:*
+        version: link:../core
 
 packages:
 

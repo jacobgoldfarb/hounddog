@@ -1,5 +1,5 @@
 {
-  "name": "@hounddog/prisma",
+  "name": "@tailchi/prisma",
   "version": "0.1.0",
   "private": false,
   "type": "module",
@@ -21,11 +21,11 @@
     "clean": "rm -rf dist"
   },
   "peerDependencies": {
-    "@hounddog/core": "*",
+    "@tailchi/core": "*",
     "@prisma/client": "^5 || ^6"
   },
   "devDependencies": {
-    "@hounddog/core": "workspace:*",
+    "@tailchi/core": "workspace:*",
     "@prisma/client": "^6.3.1"
   }
 }

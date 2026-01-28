@@ -1,5 +1,5 @@
 import type { NextFunction, Request, Response } from 'express';
-import { getConfig, clock, makeFlowId, withFlow, mark } from '@hounddog/core';
+import { getConfig, clock, makeFlowId, withFlow, mark } from '@tailchi/core';
 import { HOUND_EVENTS_PATH } from './constants.js';
 import { handleEventsRequest } from './events-handler.js';
 

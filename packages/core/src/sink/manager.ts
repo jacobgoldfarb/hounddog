@@ -2,12 +2,10 @@ import { getConfig } from '../lib/config.js';
 import type { HoundEvent } from '../types.js';
 import type { Sink } from './types.js';
 import { NoopSink } from './noop.js';
+import { HttpSink } from './http.js';
 
 let sinkInstance: Sink | null = null;
 
-/**
- * Lazily initialize and return the sink instance.
- */
 async function ensureSink(): Promise<Sink> {
   if (sinkInstance) return sinkInstance;
 
@@ -19,19 +17,17 @@ async function ensureSink(): Promise<Sink> {
     return sinkInstance;
   }
 
+  if (kind === 'http') {
+    sinkInstance = new HttpSink();
+    return sinkInstance;
+  }
+
   if (kind === 'jsonl') {
     const mod = await import('./jsonl.js');
     sinkInstance = new mod.JsonlSink();
     return sinkInstance;
   }
 
-  if (kind === 'http') {
-    const mod = await import('./http.js');
-    sinkInstance = new mod.HttpSink();
-    return sinkInstance;
-  }
-
-  // Fallback
   sinkInstance = new NoopSink();
   return sinkInstance;
 }

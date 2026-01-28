@@ -1,8 +1,6 @@
 import type { HoundConfig } from '../types.js';
+import { syncClock } from './clock.js';
 
-/**
- * Default configuration.
- */
 const defaultConfig: HoundConfig = {
   enabled: true,
   service: 'app',
@@ -20,16 +18,16 @@ const defaultConfig: HoundConfig = {
 
 let currentConfig: HoundConfig = { ...defaultConfig };
 
-/**
- * Configure Hounddog with partial options.
- * Merges with existing config; sink is replaced entirely if provided.
- */
 export function configureHounddog(partial: Partial<HoundConfig>): void {
   currentConfig = {
     ...currentConfig,
     ...partial,
     sink: partial.sink ?? currentConfig.sink,
   };
+
+  if (partial.clockDaemon) {
+    void syncClock(partial.clockDaemon);
+  }
 }
 
 /**

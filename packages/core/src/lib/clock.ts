@@ -1,29 +1,20 @@
-/**
- * Clock interface for timing operations.
- */
 export interface Clock {
-  /** Wall-clock time in epoch milliseconds. */
   nowEpochMs: () => number;
-  /** Monotonic time in milliseconds (for accurate durations). */
   nowPerfMs: () => number;
 }
 
-/**
- * Create a clock instance appropriate for the current runtime.
- * Uses performance.now() when available, falls back to Date.now().
- */
+let clockOffset = 0;
+
 function createClock(): Clock {
-  // Browser or modern Node with performance API
   const perf = globalThis.performance;
   if (perf && typeof perf.now === 'function') {
     const hasOrigin = typeof perf.timeOrigin === 'number';
     return {
-      nowEpochMs: () => (hasOrigin ? perf.timeOrigin + perf.now() : Date.now()),
+      nowEpochMs: () => (hasOrigin ? perf.timeOrigin + perf.now() : Date.now()) + clockOffset,
       nowPerfMs: () => perf.now(),
     };
   }
 
-  // Node.js with process.hrtime
   const proc = (globalThis as any).process;
   const hasHrtime =
     proc && typeof proc.hrtime === 'function' && typeof proc.hrtime.bigint === 'function';
@@ -36,19 +27,28 @@ function createClock(): Clock {
       return d[0] * 1000 + d[1] / 1_000_000;
     };
     return {
-      nowEpochMs: () => epochOriginMs + deltaMs(),
+      nowEpochMs: () => epochOriginMs + deltaMs() + clockOffset,
       nowPerfMs: () => deltaMs(),
     };
   }
 
-  // Fallback: Date.now() for both
   return {
-    nowEpochMs: () => Date.now(),
+    nowEpochMs: () => Date.now() + clockOffset,
     nowPerfMs: () => Date.now(),
   };
 }
 
-/**
- * Global clock instance.
- */
 export const clock = createClock();
+
+export async function syncClock(daemonUrl: string): Promise<void> {
+  try {
+    const localBefore = Date.now();
+    const res = await fetch(`${daemonUrl}/clock`);
+    const localAfter = Date.now();
+    const { epochMs } = await res.json();
+    const localMid = (localBefore + localAfter) / 2;
+    clockOffset = epochMs - localMid;
+  } catch {
+    clockOffset = 0;
+  }
+}

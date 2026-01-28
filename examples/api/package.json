@@ -4,9 +4,9 @@
   "type": "module",
   "dependencies": {
     "express": "^4.19.2",
-    "@hounddog/express": "workspace:*",
-    "@hounddog/core": "workspace:*",
-    "@hounddog/prisma": "workspace:*",
+    "@tailchi/express": "workspace:*",
+    "@tailchi/core": "workspace:*",
+    "@tailchi/prisma": "workspace:*",
     "@prisma/client": "^6.3.1",
     "cors": "^2.8.5"
   },

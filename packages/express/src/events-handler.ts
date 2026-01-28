@@ -1,6 +1,6 @@
 import type { Request, Response } from 'express';
-import { emitEvent } from '@hounddog/core';
-import type { HoundEvent } from '@hounddog/core';
+import { emitEvent } from '@tailchi/core';
+import type { HoundEvent } from '@tailchi/core';
 
 /**
  * Handle incoming events from frontend.

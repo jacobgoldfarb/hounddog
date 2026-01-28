@@ -1,7 +1,7 @@
 import express, { type Request, type Response } from 'express';
 import cors from 'cors';
-import { houndMiddleware } from '@hounddog/express';
-import { mark } from '@hounddog/core';
+import { houndMiddleware } from '@tailchi/express';
+import { mark } from '@tailchi/core';
 import { prisma } from './db.js';
 
 const app = express();

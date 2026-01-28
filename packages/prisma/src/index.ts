@@ -1,4 +1,4 @@
-import { clock, mark } from '@hounddog/core';
+import { clock, mark } from '@tailchi/core';
 
 const MAX_SQL_PREVIEW = 100;
 

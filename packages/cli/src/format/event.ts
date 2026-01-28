@@ -12,12 +12,12 @@ const iconStyles: Record<EventIcon, LayerStyle> = {
   http_out: { emoji: '📤', color: c.cyan, label: 'out' },  // outgoing HTTP request
   http_in: { emoji: '📥', color: c.yellow, label: 'in' },  // incoming HTTP request
   db: { emoji: '💾', color: c.magenta, label: 'db' },      // database operation
-  work: { emoji: '⚙️', color: c.white, label: 'wrk' },     // generic processing (default)
+  work: { emoji: '🔧', color: c.white, label: 'wrk' },     // generic processing (default)
   queue: { emoji: '📬', color: c.green, label: 'que' },    // message queue / job
-  cache: { emoji: '🗄️', color: c.cyan, label: 'cch' },     // cache operation
+  cache: { emoji: '📦', color: c.cyan, label: 'cch' },     // cache operation
   auth: { emoji: '🔐', color: c.yellow, label: 'ath' },    // authentication
   error: { emoji: '❌', color: c.red, label: 'err' },      // error / failure
-  info: { emoji: 'ℹ️', color: c.dim, label: 'inf' },       // informational
+  info: { emoji: '💬', color: c.dim, label: 'inf' },       // informational
 };
 
 const prefixStyles: Record<string, LayerStyle> = {

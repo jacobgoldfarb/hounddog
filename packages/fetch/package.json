@@ -1,5 +1,5 @@
 {
-  "name": "@hounddog/fetch",
+  "name": "@tailchi/fetch",
   "version": "0.1.0",
   "private": false,
   "type": "module",
@@ -21,9 +21,9 @@
     "clean": "rm -rf dist"
   },
   "peerDependencies": {
-    "@hounddog/core": "*"
+    "@tailchi/core": "*"
   },
   "devDependencies": {
-    "@hounddog/core": "workspace:*"
+    "@tailchi/core": "workspace:*"
   }
 }

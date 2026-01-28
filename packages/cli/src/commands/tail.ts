@@ -141,6 +141,9 @@ function printEvent(
   // Print flow footer for terminal events
   if (evt.flowTerminal) {
     printFlowEnd(flowColor);
+    flowStates.delete(evt.flowId);
+    const idx = recentFlows.indexOf(evt.flowId);
+    if (idx !== -1) recentFlows.splice(idx, 1);
   }
 }
 

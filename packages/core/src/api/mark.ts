@@ -3,15 +3,14 @@ import { getFlowId } from '../lib/context.js';
 import { buildEvent } from '../lib/event-builder.js';
 import { emitEvent } from '../sink/manager.js';
 import { run } from './flow.js';
+import type { EventIcon } from '../types.js';
 
-/**
- * Options for mark().
- */
 export interface MarkOptions {
-  /** Additional metadata. */
   attrs?: Record<string, unknown>;
-  /** Mark as terminal event of the flow. */
   flowTerminal?: boolean;
+  icon?: EventIcon;
+  status?: string | number;
+  durationMs?: number;
 }
 
 /**
@@ -45,6 +44,9 @@ export async function mark(
     type,
     attrs: opts.attrs,
     flowTerminal: opts.flowTerminal,
+    icon: opts.icon,
+    status: opts.status,
+    durationMs: opts.durationMs,
   });
 
   if (event) {
@@ -68,18 +70,14 @@ export async function markAndEndFlow(
   await mark(type, { ...opts, flowTerminal: true });
 }
 
-/**
- * Normalize options to MarkOptions format.
- * Supports both { attrs: {...} } and plain attrs object.
- */
 function normalizeOptions(options?: MarkOptions | Record<string, unknown>): MarkOptions {
   if (!options) return {};
-
-  // Already MarkOptions format
-  if ('attrs' in options || 'flowTerminal' in options) {
-    return options as MarkOptions;
-  }
-
-  // Plain attrs object
+  const isMarkOptions =
+    'attrs' in options ||
+    'flowTerminal' in options ||
+    'icon' in options ||
+    'status' in options ||
+    'durationMs' in options;
+  if (isMarkOptions) return options as MarkOptions;
   return { attrs: options as Record<string, unknown> };
 }

@@ -53,29 +53,17 @@ function extractOrCreateFlowId(req: Request, headerName: string): string {
   return incoming || makeFlowId();
 }
 
-/**
- * Emit request start event.
- */
 function emitRequestStart(req: Request): void {
-  void mark('BE.http.received', {
-    method: req.method,
-    path: req.path,
-  });
+  void mark('http.received', { method: req.method, path: req.path });
 }
 
-/**
- * Attach listeners for response completion.
- */
 function attachResponseListeners(
   res: Response,
   startPerf: number,
   resolve: () => void,
 ): void {
   const emitEnd = (status: string | number) => {
-    void mark('BE.http.end', {
-      status,
-      durationMs: clock.nowPerfMs() - startPerf,
-    });
+    void mark('http.responded', { status, durationMs: clock.nowPerfMs() - startPerf });
     resolve();
   };
 

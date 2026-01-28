@@ -60,26 +60,22 @@ async function executeFetch(
   const instrumentedInit: RequestInit = { ...init, headers };
 
   try {
-    await mark('FE.http.sent', { attrs: { url } });
+    await mark('http.sent', { attrs: { url } });
 
     const response = await baseFetch(input as RequestInfo, instrumentedInit);
 
-    await markAndEndFlow('FE.http.end', {
-      attrs: {
-        url,
-        status: response.status,
-        durationMs: clock.nowPerfMs() - startPerf,
-      },
+    await markAndEndFlow('http.response', {
+      attrs: { url },
+      status: response.status,
+      durationMs: clock.nowPerfMs() - startPerf,
     });
 
     return response;
   } catch (error) {
-    await markAndEndFlow('FE.http.end', {
-      attrs: {
-        url,
-        status: 'error',
-        durationMs: clock.nowPerfMs() - startPerf,
-      },
+    await markAndEndFlow('http.response', {
+      attrs: { url },
+      status: 'error',
+      durationMs: clock.nowPerfMs() - startPerf,
     });
     throw error;
   }

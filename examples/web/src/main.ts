@@ -31,9 +31,9 @@ btn.addEventListener('click', async () => {
 
 const markBtn = async () => {
   withFlow(async () => {
-    await mark('FE.button.click');
+    await mark('button.click');
     await callApi();
-  }, 'slow-turtle');
+  });
 };
 
 btnMark.addEventListener('click', markBtn);

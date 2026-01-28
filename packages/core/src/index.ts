@@ -16,4 +16,4 @@ export type { MarkOptions } from './api/index.js';
 export { emitEvent, flushSink, closeSink } from './sink/manager.js';
 
 // Types
-export type { HoundEvent, HoundConfig, HoundSinkConfig } from './types.js';
+export type { HoundEvent, HoundConfig, HoundSinkConfig, EventIcon } from './types.js';

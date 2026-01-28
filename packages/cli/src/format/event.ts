@@ -1,29 +1,60 @@
 import { c } from '../lib/colors.js';
-import type { EventLine } from '../lib/events.js';
+import type { EventLine, EventIcon } from '../lib/events.js';
 
-/**
- * Layer styling configuration.
- */
 interface LayerStyle {
   emoji: string;
   color: string;
   label: string;
 }
 
-/**
- * Get styling for an event type based on its layer prefix.
- */
-export function getLayerStyle(type: string): LayerStyle {
-  if (type.startsWith('FE.')) {
-    return { emoji: '🌐', color: c.cyan, label: 'FE' };
+const iconStyles: Record<EventIcon, LayerStyle> = {
+  user: { emoji: '👤', color: c.blue, label: 'usr' },      // user interaction (clicks, inputs)
+  http_out: { emoji: '📤', color: c.cyan, label: 'out' },  // outgoing HTTP request
+  http_in: { emoji: '📥', color: c.yellow, label: 'in' },  // incoming HTTP request
+  db: { emoji: '💾', color: c.magenta, label: 'db' },      // database operation
+  work: { emoji: '⚙️', color: c.white, label: 'wrk' },     // generic processing (default)
+  queue: { emoji: '📬', color: c.green, label: 'que' },    // message queue / job
+  cache: { emoji: '🗄️', color: c.cyan, label: 'cch' },     // cache operation
+  auth: { emoji: '🔐', color: c.yellow, label: 'ath' },    // authentication
+  error: { emoji: '❌', color: c.red, label: 'err' },      // error / failure
+  info: { emoji: 'ℹ️', color: c.dim, label: 'inf' },       // informational
+};
+
+const prefixStyles: Record<string, LayerStyle> = {
+  FE: { emoji: '🌐', color: c.cyan, label: 'FE' },
+  BE: { emoji: '⚡', color: c.yellow, label: 'BE' },
+  DB: { emoji: '💾', color: c.magenta, label: 'DB' },
+};
+
+const inferencePatterns: [RegExp, EventIcon][] = [
+  [/\b(click|tap|press|input|submit|scroll|focus|blur|hover|drag|drop)\b/i, 'user'],
+  [/\bhttp\.(sent|request|fetch|responded)\b/i, 'http_out'],
+  [/\bhttp\.(received|response)\b/i, 'http_in'],
+  [/\b(db|query|sql|prisma|mongo|postgres|mysql)\b/i, 'db'],
+  [/\b(cache|redis|memcache)\b/i, 'cache'],
+  [/\b(queue|message|publish|consume|worker|job)\b/i, 'queue'],
+  [/\b(auth|login|logout|session|token|signin|signout)\b/i, 'auth'],
+  [/\b(error|fail|exception|crash)\b/i, 'error'],
+];
+
+function inferIcon(type: string, status?: string | number): EventIcon | null {
+  if (status === 'error' || status === 'closed') return 'error';
+  for (const [pattern, icon] of inferencePatterns) {
+    if (pattern.test(type)) return icon;
   }
-  if (type.startsWith('BE.')) {
-    return { emoji: '⚡', color: c.yellow, label: 'BE' };
-  }
-  if (type.startsWith('DB.')) {
-    return { emoji: '💾', color: c.magenta, label: 'DB' };
-  }
-  return { emoji: '•', color: c.white, label: '??' };
+  return null;
+}
+
+export function getLayerStyle(type: string, icon?: EventIcon, status?: string | number): LayerStyle {
+  if (icon && iconStyles[icon]) return iconStyles[icon];
+
+  const prefix = type.split('.')[0] ?? '';
+  if (prefix in prefixStyles) return prefixStyles[prefix]!;
+
+  const inferred = inferIcon(type, status);
+  if (inferred) return iconStyles[inferred];
+
+  return iconStyles.work;
 }
 
 /**
@@ -100,7 +131,7 @@ export function formatEventLine(
     delta: number | null;
   },
 ): string {
-  const { emoji, color, label } = getLayerStyle(evt.type);
+  const { emoji, color, label } = getLayerStyle(evt.type, evt.icon, evt.status);
   const eventName = evt.type.replace(/^(FE|BE|DB)\./, '');
 
   // Build components

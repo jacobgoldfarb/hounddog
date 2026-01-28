@@ -1,3 +1,15 @@
+export type EventIcon =
+  | 'user'
+  | 'http_out'
+  | 'http_in'
+  | 'db'
+  | 'work'
+  | 'queue'
+  | 'cache'
+  | 'auth'
+  | 'error'
+  | 'info';
+
 /**
  * Event emitted by Hounddog.
  *
@@ -28,6 +40,8 @@ export type HoundEvent = {
   attrs?: Record<string, unknown>;
   /** Marks this event as the terminal event of a flow (flow is complete). */
   flowTerminal?: boolean;
+  /** Icon hint for CLI display. Falls back to type prefix detection (FE./BE./DB.). */
+  icon?: EventIcon;
 };
 
 /**

@@ -1,8 +1,17 @@
 import { readFile } from 'node:fs/promises';
 
-/**
- * A single event line from the JSONL log.
- */
+export type EventIcon =
+  | 'user'
+  | 'http_out'
+  | 'http_in'
+  | 'db'
+  | 'work'
+  | 'queue'
+  | 'cache'
+  | 'auth'
+  | 'error'
+  | 'info';
+
 export interface EventLine {
   flowId: string;
   flowLabel?: string;
@@ -14,6 +23,7 @@ export interface EventLine {
   status?: string | number;
   attrs?: Record<string, unknown>;
   flowTerminal?: boolean;
+  icon?: EventIcon;
 }
 
 /**

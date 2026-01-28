@@ -1,11 +1,15 @@
 import { clock } from '../lib/clock.js';
-import { withFlow, makeFlowId } from '../lib/context.js';
+import { withFlow, makeFlowId, getFlowLabel } from '../lib/context.js';
 import { buildFlowEvent } from '../lib/event-builder.js';
 import { emitEvent } from '../sink/manager.js';
 
 /**
  * Execute a function within a new flow.
  * Emits `<name>.start` and `<name>.end` events.
+ *
+ * @param name - Flow name (used as event prefix)
+ * @param fn - Function to execute
+ * @param attrs - Optional attributes
  *
  * @example
  * ```ts
@@ -24,15 +28,17 @@ export async function run<T>(
   const startPerf = clock.nowPerfMs();
 
   return withFlow(async () => {
+    const label = getFlowLabel();
+
     // Emit start
-    await emitEvent(buildFlowEvent(flowId, `${name}.start`, attrs));
+    await emitEvent(buildFlowEvent(flowId, `${name}.start`, attrs, undefined, label));
 
     try {
       return await fn();
     } finally {
       // Emit end with duration
       const durationMs = clock.nowPerfMs() - startPerf;
-      await emitEvent(buildFlowEvent(flowId, `${name}.end`, attrs, durationMs));
+      await emitEvent(buildFlowEvent(flowId, `${name}.end`, attrs, durationMs, label));
     }
   }, flowId);
 }

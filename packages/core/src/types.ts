@@ -10,6 +10,8 @@
 export type HoundEvent = {
   /** Globally unique identifier for a flow (request/action/job). */
   flowId: string;
+  /** Human-readable label for the flow (defaults to flowId if not set). */
+  flowLabel?: string;
   /** Event name; prefer namespaced forms like "BE.http.start" / "BE.http.end". */
   type: string;
   /** Wall-clock timestamp in epoch milliseconds. */

@@ -5,6 +5,7 @@ import { readFile } from 'node:fs/promises';
  */
 export interface EventLine {
   flowId: string;
+  flowLabel?: string;
   type: string;
   timestampMs: number;
   service: string;

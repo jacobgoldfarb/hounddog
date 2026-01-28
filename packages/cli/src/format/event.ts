@@ -48,6 +48,14 @@ export function shortFlowId(id: string): string {
 }
 
 /**
+ * Get display name for a flow.
+ * Uses flowLabel if available, otherwise truncated flowId.
+ */
+export function getFlowDisplayName(flowId: string, flowLabel?: string): string {
+  return flowLabel ?? shortFlowId(flowId);
+}
+
+/**
  * Get a consistent color for a flow based on its ID hash.
  */
 export function getFlowColor(flowId: string): string {

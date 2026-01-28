@@ -5,7 +5,8 @@ export { configureHounddog, getConfig } from './lib/config.js';
 export { clock } from './lib/clock.js';
 
 // Flow context
-export { withFlow, getFlowId, makeFlowId } from './lib/context.js';
+export { withFlow, getFlowId, getFlowLabel, makeFlowId } from './lib/context.js';
+export type { WithFlowOptions } from './lib/context.js';
 
 // Event API
 export { mark, markAndEndFlow, run, action } from './api/index.js';

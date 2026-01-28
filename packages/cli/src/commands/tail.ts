@@ -2,7 +2,7 @@ import { stat, open } from 'node:fs/promises';
 import { createInterface } from 'node:readline';
 import { c } from '../lib/colors.js';
 import { parseEventLine, type EventLine } from '../lib/events.js';
-import { formatEventLine, getFlowColor, shortFlowId, box } from '../format/event.js';
+import { formatEventLine, getFlowColor, getFlowDisplayName, box } from '../format/event.js';
 import { hasFlag, type ParsedArgs } from '../lib/args.js';
 
 /**
@@ -132,7 +132,7 @@ function printEvent(
 
   // Print flow header for new flows
   if (isNewFlow) {
-    printFlowStart(evt.flowId, flowColor);
+    printFlowStart(evt.flowId, evt.flowLabel, flowColor);
   }
 
   // Print event line
@@ -144,11 +144,14 @@ function printEvent(
   }
 }
 
-function printFlowStart(flowId: string, flowColor: string): void {
+function printFlowStart(flowId: string, flowLabel: string | undefined, flowColor: string): void {
+  const displayName = getFlowDisplayName(flowId, flowLabel);
   const hr = box.horizontal.repeat(box.width);
+  const padding = Math.max(0, 44 - displayName.length);
+
   process.stdout.write(`\n${flowColor}${box.topLeft}${hr}${box.topRight}${c.reset}\n`);
   process.stdout.write(
-    `${flowColor}${box.vertical}${c.reset} ${c.bold}Flow ${shortFlowId(flowId)}${c.reset} ${c.dim}started${c.reset}${' '.repeat(36)}${flowColor}${box.vertical}${c.reset}\n`,
+    `${flowColor}${box.vertical}${c.reset} ${c.bold}Flow ${displayName}${c.reset} ${c.dim}started${c.reset}${' '.repeat(padding)}${flowColor}${box.vertical}${c.reset}\n`,
   );
   process.stdout.write(`${flowColor}${box.leftT}${hr}${box.rightT}${c.reset}\n`);
 }

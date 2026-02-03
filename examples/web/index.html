@@ -5,37 +5,147 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>tailchi Web Example</title>
     <style>
+      * { box-sizing: border-box; }
       body {
-        font-family:
-          system-ui,
-          -apple-system,
-          Segoe UI,
-          Roboto,
-          Helvetica,
-          Arial,
-          sans-serif;
-        padding: 24px;
+        font-family: 'SF Mono', 'Fira Code', 'JetBrains Mono', Consolas, monospace;
+        padding: 32px;
+        background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #16213e 100%);
+        color: #e4e4e7;
+        min-height: 100vh;
+        margin: 0;
+      }
+      h1 {
+        color: #22d3ee;
+        font-weight: 400;
+        font-size: 28px;
+        margin-bottom: 8px;
+      }
+      .subtitle {
+        color: #71717a;
+        margin-bottom: 32px;
+        font-size: 14px;
+      }
+      .section {
+        margin-bottom: 24px;
+      }
+      .section-title {
+        color: #a1a1aa;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        margin-bottom: 12px;
+      }
+      .btn-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
       }
       button {
-        padding: 10px 16px;
-        font-size: 16px;
+        padding: 10px 18px;
+        font-size: 13px;
+        font-family: inherit;
         cursor: pointer;
+        border: 1px solid #3f3f46;
+        border-radius: 6px;
+        background: #27272a;
+        color: #e4e4e7;
+        transition: all 0.15s ease;
+      }
+      button:hover {
+        background: #3f3f46;
+        border-color: #52525b;
+      }
+      button.primary {
+        background: #0891b2;
+        border-color: #0891b2;
+        color: #fff;
+      }
+      button.primary:hover {
+        background: #0e7490;
+        border-color: #0e7490;
+      }
+      button.warning {
+        background: #b45309;
+        border-color: #b45309;
+        color: #fff;
+      }
+      button.warning:hover {
+        background: #a16207;
+      }
+      button.danger {
+        background: #b91c1c;
+        border-color: #b91c1c;
+        color: #fff;
+      }
+      button.danger:hover {
+        background: #991b1b;
       }
       #out {
-        margin-top: 16px;
+        margin-top: 32px;
+        padding: 20px;
+        background: #18181b;
+        border: 1px solid #27272a;
+        border-radius: 8px;
         white-space: pre-wrap;
+        font-size: 13px;
+        color: #a1a1aa;
+        min-height: 120px;
+      }
+      #out.loading {
+        color: #fbbf24;
+      }
+      #out.error {
+        color: #f87171;
+      }
+      #out.success {
+        color: #4ade80;
+      }
+      .hint {
+        color: #52525b;
+        font-size: 11px;
+        margin-top: 8px;
       }
     </style>
   </head>
   <body>
-    <h1>tailchi Web Example</h1>
-    <p>Start the API at http://localhost:4000, then click the button.</p>
-    <button id="btn">Call API</button>
-    <button id="btn-mark">Mark Button Click & Call API</button>
-    <button id="btn-db">Call API with DB Access</button>
-    <button id="btn-mark-db">Mark Button Click & Call API with DB Access</button>
-    <button id="btn-supabase">Call Supabase (coming next)</button>
-    <div id="out"></div>
+    <h1>🐕 tailchi</h1>
+    <p class="subtitle">Start the API at localhost:4000, then run <code>tailchi -f --path examples/api/.tailchi/events.jsonl</code></p>
+
+    <div class="section">
+      <div class="section-title">Basic</div>
+      <div class="btn-group">
+        <button id="btn-hello" class="primary">Hello API</button>
+        <button id="btn-users">Get Users</button>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Timing</div>
+      <div class="btn-group">
+        <button id="btn-slow" class="warning">Slow (3s)</button>
+        <button id="btn-parallel">Parallel Tasks</button>
+        <button id="btn-retry">Retry Logic</button>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Complex Flows</div>
+      <div class="btn-group">
+        <button id="btn-nested">Nested Operations</button>
+        <button id="btn-multi">Multi-step Flow</button>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Error Handling</div>
+      <div class="btn-group">
+        <button id="btn-error" class="danger">Trigger Error</button>
+      </div>
+    </div>
+
+    <div id="out">Click a button to start a flow...</div>
+    <div class="hint">Watch the CLI output to see events stream in real-time</div>
+
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

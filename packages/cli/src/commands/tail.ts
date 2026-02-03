@@ -8,7 +8,9 @@ import { hasFlag, getFlagValue, type ParsedArgs } from '../lib/args.js';
 
 interface FlowState {
   lastTs: number;
+  lastWallTime: number;
   eventCount: number;
+  color: string;
 }
 
 interface TailOptions {
@@ -64,6 +66,7 @@ async function streamEvents(filePath: string, opts: TailOptions): Promise<void> 
   const flowStates = new Map<string, FlowState>();
   const recentFlows: string[] = [];
   const intervalMs = 200;
+  const idleTimeoutMs = 2000;
   let running = true;
   let warnedMissing = false;
 
@@ -105,6 +108,8 @@ async function streamEvents(filePath: string, opts: TailOptions): Promise<void> 
         await fh.close();
         lastSize = st.size;
       }
+
+      closeIdleFlows(flowStates, recentFlows, idleTimeoutMs);
     } catch {
       if (!warnedMissing) {
         process.stdout.write(`${c.dim}waiting for ${filePath}...${c.reset}\n`);
@@ -129,9 +134,12 @@ function printEvent(
   recentFlows: string[],
 ): void {
   const isNewFlow = !flowStates.has(evt.flowId);
+  const flowColor = getFlowColor(evt.flowId);
   const state = flowStates.get(evt.flowId) || {
     lastTs: evt.timestampMs,
+    lastWallTime: Date.now(),
     eventCount: 0,
+    color: flowColor,
   };
 
   if (isNewFlow) {
@@ -141,10 +149,9 @@ function printEvent(
 
   const delta = isNewFlow ? 0 : Math.max(0, Math.round(evt.timestampMs - state.lastTs));
   state.lastTs = evt.timestampMs;
+  state.lastWallTime = Date.now();
   state.eventCount++;
   flowStates.set(evt.flowId, state);
-
-  const flowColor = getFlowColor(evt.flowId);
 
   // Print flow header for new flows
   if (isNewFlow) {
@@ -160,6 +167,22 @@ function printEvent(
     flowStates.delete(evt.flowId);
     const idx = recentFlows.indexOf(evt.flowId);
     if (idx !== -1) recentFlows.splice(idx, 1);
+  }
+}
+
+function closeIdleFlows(
+  flowStates: Map<string, FlowState>,
+  recentFlows: string[],
+  idleTimeoutMs: number,
+): void {
+  const now = Date.now();
+  for (const [flowId, state] of flowStates) {
+    if (now - state.lastWallTime > idleTimeoutMs) {
+      printFlowEnd(state.color);
+      flowStates.delete(flowId);
+      const idx = recentFlows.indexOf(flowId);
+      if (idx !== -1) recentFlows.splice(idx, 1);
+    }
   }
 }
 

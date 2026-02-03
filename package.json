@@ -18,8 +18,8 @@
     "build:cli": "pnpm --filter @hounddog/cli build",
     "install:all": "pnpm install --filter . --include=dev",
     "clean:all": "pnpm -r --if-present clean",
-    "cli:tail": "pnpm --filter @hounddog/cli build && node packages/cli/dist/cli.js tail --path examples/api/.hounddog/events.jsonl --from-start",
-    "cli:last": "pnpm --filter @hounddog/cli build && node packages/cli/dist/cli.js flows last --path examples/api/.hounddog/events.jsonl",
+    "cli:tail": "pnpm --filter @tailchi/cli build && node packages/cli/dist/cli.js tail --path examples/api/.tailchi/events.jsonl --from-start",
+    "cli:last": "pnpm --filter @tailchi/cli build && node packages/cli/dist/cli.js flows last --path examples/api/.tailchi/events.jsonl",
     "example:api": "pnpm --filter hounddog-example-api dev",
     "example:web": "pnpm --filter hounddog-example-web dev"
   },

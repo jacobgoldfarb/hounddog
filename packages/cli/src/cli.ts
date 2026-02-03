@@ -13,6 +13,12 @@ async function main(): Promise<void> {
     return;
   }
 
+  // -f is alias for tail
+  if (hasFlag(args, '-f')) {
+    await runTail(args);
+    return;
+  }
+
   // Route to command
   switch (args.command) {
     case 'flows':
